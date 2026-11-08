@@ -1,0 +1,643 @@
+/* 主题切换样式 */
+:root {
+  /* 白天模式变量 */
+  --bg-color-light: #f8f9fa;
+  --text-color-light: #333;
+  --primary-color-light: #005826;
+  --primary-hover-light: #00703a;
+  --secondary-color-light: #9fd878;
+  --header-bg-light: rgba(0, 88, 38, 0.9);
+  --footer-bg-light: rgba(0, 88, 38, 0.9);
+  --overlay-bg-light: rgba(255, 255, 255, 0.8);
+  --card-bg-light: #fff;
+  --border-color-light: #ddd;
+  --box-shadow-light: #0d0d0d;
+  
+  /* 容器和组件颜色 - 白天模式 */
+  --container-bg-light: #fff;
+  --secondary-bg-light: #f5f8f3;
+  --input-bg-light: #fff;
+  --input-border-light: #E0E0E0;
+  --button-primary-light: #367c2b;
+  --button-primary-hover-light: #2a6021;
+  --button-secondary-light: #f8f8f8;
+  --button-secondary-hover-light: #efefef;
+  --alert-bg-success-light: rgba(40, 167, 69, 0.1);
+  --alert-color-success-light: #28a745;
+  --alert-border-success-light: rgba(40, 167, 69, 0.2);
+  --alert-bg-error-light: rgba(220, 53, 69, 0.1);
+  --alert-color-error-light: #dc3545;
+  --alert-border-error-light: rgba(220, 53, 69, 0.2);
+  --alert-bg-warning-light: rgba(255, 193, 7, 0.1);
+  --alert-color-warning-light: #ffc107;
+  --alert-border-warning-light: rgba(255, 193, 7, 0.2);
+  --alert-bg-info-light: rgba(23, 162, 184, 0.1);
+  --alert-color-info-light: #17a2b8;  
+  --alert-border-info-light: rgba(23, 162, 184, 0.2);
+  --link-color-light: #005826;
+  --link-hover-light: #00703a;
+  --ceremony-scene-bg-light: #f9f7f2;
+  --ceremony-steps-bg-light: #e8f5e9;
+  --ceremony-step-bg-light: rgba(255, 255, 255, 0.8);
+  --ceremony-step-active-bg-light: #005826;
+  --ceremony-step-active-color-light: #fff;
+  --tea-categories-item-bg-light: #fff;
+  --divider-color-light: #ddd;
+  --profile-edit-header-bg-light: linear-gradient(135deg, #5D8C51, #3F6334);
+  --profile-edit-content-bg-light: #FCFCFA;
+  --form-section-bg-light: #F5F8F3;
+  
+  /* 通用容器 - 白天模式 */
+  --div-bg-light: rgba(255, 255, 255, 0.95);
+  --div-bg-alt-light: #f8f9fa;
+  --div-border-light: #eee;
+  --div-shadow-light: 0 2px 5px rgba(0, 0, 0, 0.05);
+  --section-bg-light: #fff;
+  --panel-bg-light: #fff;
+  --panel-header-bg-light: #f2f7f2;
+  --sidebar-bg-light: #f5f8f3;
+  --tooltip-bg-light: rgba(0, 0, 0, 0.8);
+  --tooltip-color-light: #fff;
+  --code-bg-light: #f5f5f5;
+  --code-color-light: #333;
+  
+  /* 黑夜模式变量 */
+  --bg-color-dark: #121212;
+  --text-color-dark: #e0e0e0;
+  --primary-color-dark: #4a8f52;
+  --primary-hover-dark: #5aa963;
+  --secondary-color-dark: #6c9b41;
+  --header-bg-dark: rgba(0, 70, 30, 0.95);
+  --footer-bg-dark: rgba(18, 18, 18, 0.95);
+  --overlay-bg-dark: rgba(0, 0, 0, 0.7);
+  --card-bg-dark: #1e1e1e;
+  --border-color-dark: #333;
+  --box-shadow-dark: 0 2px 8px rgba(0, 0, 0, 0.4);
+  
+  /* 容器和组件颜色 - 黑夜模式 */
+  --container-bg-dark: #1e1e1e;
+  --secondary-bg-dark: #2d2d2d;
+  --input-bg-dark: #2d2d2d;
+  --input-border-dark: #444;
+  --button-primary-dark: #4a8f52;
+  --button-primary-hover-dark: #5aa963;
+  --button-secondary-dark: #333;
+  --button-secondary-hover-dark: #444;
+  --alert-bg-success-dark: rgba(40, 167, 69, 0.15);
+  --alert-color-success-dark: #5cff8b;
+  --alert-border-success-dark: rgba(40, 167, 69, 0.3);
+  --alert-bg-error-dark: rgba(220, 53, 69, 0.15);
+  --alert-color-error-dark: #ff6b7d;
+  --alert-border-error-dark: rgba(220, 53, 69, 0.3);
+  --alert-bg-warning-dark: rgba(255, 193, 7, 0.15);
+  --alert-color-warning-dark: #ffd54f;
+  --alert-border-warning-dark: rgba(255, 193, 7, 0.3);
+  --alert-bg-info-dark: rgba(23, 162, 184, 0.15);
+  --alert-color-info-dark: #5edfff;
+  --alert-border-info-dark: rgba(23, 162, 184, 0.3);
+  --link-color-dark: #6c9b41;
+  --link-hover-dark: #7db44f;
+  --ceremony-scene-bg-dark: #1a1a1a;
+  --ceremony-steps-bg-dark: #252525;
+  --ceremony-step-bg-dark: rgba(45, 45, 45, 0.9);
+  --ceremony-step-active-bg-dark: #4a8f52;
+  --ceremony-step-active-color-dark: #e0e0e0;
+  --tea-categories-item-bg-dark: #252525;
+  --divider-color-dark: #444;
+  --profile-edit-header-bg-dark: linear-gradient(135deg, #2d432a, #1e2e1c);
+  --profile-edit-content-bg-dark: #1a1a1a;
+  --form-section-bg-dark: #252525;
+  
+  /* 通用容器 - 黑夜模式 */
+  --div-bg-dark: rgba(30, 30, 30, 0.95);
+  --div-bg-alt-dark: #1a1a1a;
+  --div-border-dark: #333;
+  --div-shadow-dark: 0 2px 5px rgba(0, 0, 0, 0.2);
+  --section-bg-dark: #1e1e1e;
+  --panel-bg-dark: #252525;
+  --panel-header-bg-dark: #2a2a2a;
+  --sidebar-bg-dark: #252525;
+  --tooltip-bg-dark: rgba(80, 80, 80, 0.9);
+  --tooltip-color-dark: #e0e0e0;
+  --code-bg-dark: #2d2d2d;
+  --code-color-dark: #e0e0e0;
+  
+  /* 默认使用白天模式 */
+  --bg-color: var(--bg-color-light);
+  --text-color: var(--text-color-light);
+  --primary-color: var(--primary-color-light);
+  --primary-hover: var(--primary-hover-light);
+  --secondary-color: var(--secondary-color-light);
+  --header-bg: var(--header-bg-light);
+  --footer-bg: var(--footer-bg-light);
+  --overlay-bg: var(--overlay-bg-light);
+  --card-bg: var(--card-bg-light);
+  --border-color: var(--border-color-light);
+  --box-shadow: var(--box-shadow-light);
+  
+  /* 容器和组件变量 - 默认值 */
+  --container-bg: var(--container-bg-light);
+  --secondary-bg: var(--secondary-bg-light);
+  --input-bg: var(--input-bg-light);
+  --input-border: var(--input-border-light);
+  --button-primary: var(--button-primary-light);
+  --button-primary-hover: var(--button-primary-hover-light);
+  --button-secondary: var(--button-secondary-light);
+  --button-secondary-hover: var(--button-secondary-hover-light);
+  --alert-bg-success: var(--alert-bg-success-light);
+  --alert-color-success: var(--alert-color-success-light);
+  --alert-border-success: var(--alert-border-success-light);
+  --alert-bg-error: var(--alert-bg-error-light);
+  --alert-color-error: var(--alert-color-error-light);
+  --alert-border-error: var(--alert-border-error-light);
+  --alert-bg-warning: var(--alert-bg-warning-light);
+  --alert-color-warning: var(--alert-color-warning-light);
+  --alert-border-warning: var(--alert-border-warning-light);
+  --alert-bg-info: var(--alert-bg-info-light);
+  --alert-color-info: var(--alert-color-info-light);
+  --alert-border-info: var(--alert-border-info-light);
+  --link-color: var(--link-color-light);
+  --link-hover: var(--link-hover-light);
+  --ceremony-scene-bg: var(--ceremony-scene-bg-light);
+  --ceremony-steps-bg: var(--ceremony-steps-bg-light);
+  --ceremony-step-bg: var(--ceremony-step-bg-light);
+  --ceremony-step-active-bg: var(--ceremony-step-active-bg-light);
+  --ceremony-step-active-color: var(--ceremony-step-active-color-light);
+  --tea-categories-item-bg: var(--tea-categories-item-bg-light);
+  --divider-color: var(--divider-color-light);
+  --profile-edit-header-bg: var(--profile-edit-header-bg-light);
+  --profile-edit-content-bg: var(--profile-edit-content-bg-light);
+  --form-section-bg: var(--form-section-bg-light);
+  
+  /* 通用容器变量 - 默认值 */
+  --div-bg: var(--div-bg-light);
+  --div-bg-alt: var(--div-bg-alt-light);
+  --div-border: var(--div-border-light);
+  --div-shadow: var(--div-shadow-light);
+  --section-bg: var(--section-bg-light);
+  --panel-bg: var(--panel-bg-light);
+  --panel-header-bg: var(--panel-header-bg-light);
+  --sidebar-bg: var(--sidebar-bg-light);
+  --tooltip-bg: var(--tooltip-bg-light);
+  --tooltip-color: var(--tooltip-color-light);
+  --code-bg: var(--code-bg-light);
+  --code-color: var(--code-color-light);
+}
+
+/* 黑夜模式应用 */
+body.dark-mode {
+  --bg-color: var(--bg-color-dark);
+  --text-color: var(--text-color-dark);
+  --primary-color: var(--primary-color-dark);
+  --primary-hover: var(--primary-hover-dark);
+  --secondary-color: var(--secondary-color-dark);
+  --header-bg: var(--header-bg-dark);
+  --footer-bg: var(--footer-bg-dark);
+  --overlay-bg: var(--overlay-bg-dark);
+  --card-bg: var(--card-bg-dark);
+  --border-color: var(--border-color-dark);
+  --box-shadow: var(--box-shadow-dark);
+  
+  /* 容器和组件变量 - 黑夜模式赋值 */
+  --container-bg: var(--container-bg-dark);
+  --secondary-bg: var(--secondary-bg-dark);
+  --input-bg: var(--input-bg-dark);
+  --input-border: var(--input-border-dark);
+  --button-primary: var(--button-primary-dark);
+  --button-primary-hover: var(--button-primary-hover-dark);
+  --button-secondary: var(--button-secondary-dark);
+  --button-secondary-hover: var(--button-secondary-hover-dark);
+  --alert-bg-success: var(--alert-bg-success-dark);
+  --alert-color-success: var(--alert-color-success-dark);
+  --alert-border-success: var(--alert-border-success-dark);
+  --alert-bg-error: var(--alert-bg-error-dark);
+  --alert-color-error: var(--alert-color-error-dark);
+  --alert-border-error: var(--alert-border-error-dark);
+  --alert-bg-warning: var(--alert-bg-warning-dark);
+  --alert-color-warning: var(--alert-color-warning-dark);
+  --alert-border-warning: var(--alert-border-warning-dark);
+  --alert-bg-info: var(--alert-bg-info-dark);
+  --alert-color-info: var(--alert-color-info-dark);
+  --alert-border-info: var(--alert-border-info-dark);
+  --link-color: var(--link-color-dark);
+  --link-hover: var(--link-hover-dark);
+  --ceremony-scene-bg: var(--ceremony-scene-bg-dark);
+  --ceremony-steps-bg: var(--ceremony-steps-bg-dark);
+  --ceremony-step-bg: var(--ceremony-step-bg-dark);
+  --ceremony-step-active-bg: var(--ceremony-step-active-bg-dark);
+  --ceremony-step-active-color: var(--ceremony-step-active-color-dark);
+  --tea-categories-item-bg: var(--tea-categories-item-bg-dark);
+  --divider-color: var(--divider-color-dark);
+  --profile-edit-header-bg: var(--profile-edit-header-bg-dark);
+  --profile-edit-content-bg: var(--profile-edit-content-bg-dark);
+  --form-section-bg: var(--form-section-bg-dark);
+  
+  /* 通用容器变量 - 黑夜模式赋值 */
+  --div-bg: var(--div-bg-dark);
+  --div-bg-alt: var(--div-bg-alt-dark);
+  --div-border: var(--div-border-dark);
+  --div-shadow: var(--div-shadow-dark);
+  --section-bg: var(--section-bg-dark);
+  --panel-bg: var(--panel-bg-dark);
+  --panel-header-bg: var(--panel-header-bg-dark);
+  --sidebar-bg: var(--sidebar-bg-dark);
+  --tooltip-bg: var(--tooltip-bg-dark);
+  --tooltip-color: var(--tooltip-color-dark);
+  --code-bg: var(--code-bg-dark);
+  --code-color: var(--code-color-dark);
+}
+
+/* JavaScript动态添加的深色模式类 */
+.dark-mode-container {
+  background-color: var(--container-bg-dark) !important;
+  color: var(--text-color-dark) !important;
+  border-color: var(--border-color-dark) !important;
+  box-shadow: var(--div-shadow-dark) !important;
+}
+
+/* 内容容器样式 */
+.dark-mode-container.container, 
+.dark-mode-container.wrapper, 
+.dark-mode-container.content, 
+.dark-mode-container.section, 
+.dark-mode-container.card, 
+.dark-mode-container.profile-section, 
+.dark-mode-container.tea-card, 
+.dark-mode-container.form-section,
+.dark-mode-container.profile-edit-container {
+  background-color: var(--container-bg-dark) !important;
+}
+
+/* 次要容器样式 */
+.dark-mode-container.bg-alt,
+.dark-mode-container.secondary-bg, 
+.dark-mode-container.ceremony-steps, 
+.dark-mode-container.form-section {
+  background-color: var(--secondary-bg-dark) !important;
+}
+
+/* 特殊容器样式 */
+.dark-mode-container.tea-item {
+  background-color: var(--tea-categories-item-bg-dark) !important;
+}
+
+.dark-mode-container.ceremony-scene {
+  background-color: var(--ceremony-scene-bg-dark) !important;
+}
+
+.dark-mode-container.step-item {
+  background-color: var(--ceremony-step-bg-dark) !important;
+}
+
+.dark-mode-container.step-item.active {
+  background-color: var(--ceremony-step-active-bg-dark) !important;
+  color: var(--ceremony-step-active-color-dark) !important;
+}
+
+/* 表单元素样式 */
+.dark-mode-container input,
+.dark-mode-container textarea,
+.dark-mode-container select {
+  background-color: var(--input-bg-dark) !important;
+  color: var(--text-color-dark) !important;
+  border-color: var(--input-border-dark) !important;
+}
+
+/* 链接样式 */
+.dark-mode-container a {
+  color: var(--link-color-dark) !important;
+}
+
+.dark-mode-container a:hover {
+  color: var(--link-hover-dark) !important;
+}
+
+/* 应用变量到样式 */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+body::before {
+  background-color: var(--overlay-bg);
+  transition: background-color 0.3s;
+}
+
+header {
+  background-color: var(--header-bg);
+  transition: background-color 0.3s;
+}
+
+footer {
+  background-color: var(--footer-bg);
+  transition: background-color 0.3s;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--primary-color);
+  transition: color 0.3s;
+}
+
+h1::after, h2::after {
+  background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+  transition: background 0.3s;
+}
+
+.nav-links a::after {
+  background-color: var(--secondary-color);
+  transition: background-color 0.3s, width 0.3s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+  color: var(--secondary-color);
+  transition: color 0.3s;
+}
+
+/* 主题切换按钮样式 */
+.theme-switcher {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 999;
+  background-color: var(--primary-color);
+  color: #fff;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+.theme-switcher:hover {
+  transform: scale(1.1);
+  background-color: var(--primary-hover);
+}
+
+.theme-switcher i {
+  font-size: 1.2rem;
+}
+
+/* 全局通用容器样式 - 确保所有div都响应主题切换 */
+div {
+  /* background-color: var(--div-bg);
+  border-color: var(--div-border); */
+  box-shadow: var(--div-shadow);
+  transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s, color 0.3s;
+}
+
+/* 特定命名容器样式 */
+.container, .wrapper, .content, .section, .card-body, .panel, .sidebar, 
+.main-content, .widget, .box, .block, .info-box, .content-box, .teacup {
+  background-color: var(--container-bg);
+  border-color: var(--border-color);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+/* 次要容器 */
+.container-alt, .bg-alt, .alternate, [class*="bg-light"], [class*="card"] {
+  background-color: var(--div-bg-alt);
+  transition: background-color 0.3s;
+}
+
+/* 容器和卡片样式 */
+.card, .profile-section, .tea-card, .form-section, .ceremony-scene, 
+.tea-item, .auth-card, .profile-edit-container, .encyclopedia-container,
+.ceremony-container, .profile-container {
+  background-color: var(--container-bg);
+  border-color: var(--border-color);
+  box-shadow: var(--box-shadow);
+  transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+/* 所有部分容器元素 */
+section, article, aside, nav, header div, footer div, main div {
+  /* background-color: var(--section-bg); */
+  /* border-color: var(--border-color); */
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+/* 面板元素 */
+.panel, .card-header, .panel-header, .widget-header {
+  background-color: var(--panel-header-bg);
+}
+
+.panel-body, .card-body {
+  background-color: var(--panel-bg);
+}
+
+/* 页面内部背景区域 */
+.ceremony-steps, .form-section, .profile-edit-wrapper, .profile-edit-content,
+.secondary-container, .auth-form {
+  background-color: var(--secondary-bg);
+  transition: background-color 0.3s;
+}
+
+/* 输入框样式 */
+input, textarea, select {
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  border-color: var(--input-border);
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+/* 按钮样式 */
+.btn, button, .primary-btn, .auth-button {
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-primary, .primary-btn, .auth-button {
+  background-color: var(--button-primary);
+}
+
+.btn-primary:hover, .primary-btn:hover, .auth-button:hover {
+  background-color: var(--button-primary-hover);
+}
+
+.btn-secondary, .secondary-btn {
+  background-color: var(--button-secondary);
+}
+
+.btn-secondary:hover, .secondary-btn:hover {
+  background-color: var(--button-secondary-hover);
+}
+
+/* 链接样式 */
+a {
+  color: var(--link-color);
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: var(--link-hover);
+}
+
+/* 表格样式 */
+table, th, td {
+  border-color: var(--border-color);
+  transition: border-color 0.3s;
+}
+
+/* 表格元素 */
+table {
+  background-color: var(--container-bg);
+  color: var(--text-color);
+}
+
+th {
+  background-color: var(--panel-header-bg);
+}
+
+tr:nth-child(even) {
+  background-color: var(--div-bg-alt);
+}
+
+tr:hover {
+  background-color: var(--secondary-bg);
+}
+
+/* 警告提示样式 */
+.alert-success {
+  background-color: var(--alert-bg-success);
+  color: var(--alert-color-success);
+  border-color: var(--alert-border-success);
+}
+
+.alert-error, .alert-danger {
+  background-color: var(--alert-bg-error);
+  color: var(--alert-color-error);
+  border-color: var(--alert-border-error);
+}
+
+.alert-warning {
+  background-color: var(--alert-bg-warning);
+  color: var(--alert-color-warning);
+  border-color: var(--alert-border-warning);
+}
+
+.alert-info {
+  background-color: var(--alert-bg-info);
+  color: var(--alert-color-info);
+  border-color: var(--alert-border-info);
+}
+
+/* 分隔线样式 */
+.divider::before, .divider::after, hr {
+  border-color: var(--divider-color);
+}
+
+/* 茶艺页面元素 */
+.ceremony-scene {
+  background-color: var(--ceremony-scene-bg);
+}
+
+.ceremony-steps {
+  background-color: var(--ceremony-steps-bg);
+}
+
+.step-item {
+  background-color: var(--ceremony-step-bg);
+}
+
+.step-item.active {
+  background-color: var(--ceremony-step-active-bg);
+  color: var(--ceremony-step-active-color);
+}
+
+/* 茶叶百科元素 */
+.tea-item {
+  background-color: var(--tea-categories-item-bg);
+}
+
+/* 个人资料编辑页面元素 */
+.profile-edit-header {
+  background: var(--profile-edit-header-bg);
+}
+
+.profile-edit-content {
+  background-color: var(--profile-edit-content-bg);
+}
+
+.form-section {
+  background-color: var(--form-section-bg);
+}
+
+/* 工具提示和弹出框 */
+.tooltip, .popover, [data-tooltip] {
+  background-color: var(--tooltip-bg);
+  color: var(--tooltip-color);
+}
+
+/* 代码块 */
+pre, code, .code {
+  background-color: var(--code-bg);
+  color: var(--code-color);
+}
+
+/* 模态框 */
+.modal, .modal-content, .dialog {
+  background-color: var(--container-bg);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+.modal-header, .dialog-header {
+  background-color: var(--panel-header-bg);
+}
+
+.modal-footer, .dialog-footer {
+  background-color: var(--div-bg-alt);
+}
+
+/* 侧边栏 */
+.sidebar, aside {
+  background-color: var(--sidebar-bg);
+}
+
+/* 标签和徽章 */
+.badge, .tag, .label {
+  background-color: var(--secondary-color);
+  transition: background-color 0.3s;
+}
+
+/* 图标颜色 */
+.icon, i[class*="fa-"], i[class*="icon"], svg {
+  color: var(--primary-color);
+  transition: color 0.3s;
+}
+
+/* 特殊修复：确保某些特定的组件正确显示 */
+/* 1. 茶叶背景纹理 */
+.tealeaf-bg, .tea-pattern, .leaf-pattern {
+  background-color: transparent !important;
+}
+
+/* 2. 视频容器 */
+#tea-video-container, .video-container {
+  background-color: transparent !important;
+}
+
+/* 3. 图片容器 */
+.img-container, figure {
+  background-color: transparent !important;
+}
+
+/* 4. SVG和图标 */
+svg path, svg rect, svg circle, svg polygon {
+  transition: fill 0.3s, stroke 0.3s;
+}
+
+/* 覆盖特定元素的背景透明度 */
+[class*="transparent"], [class*="overlay"], [class*="pattern"] {
+  background-color: transparent !important;
+}
+
+/* 过渡动画 */
+* {
+  transition-duration: 0.3s;
+} 

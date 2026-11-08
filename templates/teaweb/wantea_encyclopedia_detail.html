@@ -1,0 +1,96 @@
+{% extends 'teaweb/base.html' %}
+
+{% block title %}{{ entry.title }} - 皖茶百科{% endblock %}
+
+{% block extra_css %}
+<style>
+    .encyclopedia-detail-container {
+        max-width: 1200px;
+        margin: 30px auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .video-container {
+        margin-bottom: 30px;
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 比例 */
+        height: 0;
+        overflow: hidden;
+    }
+    
+    .video-container video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+    }
+    
+    .content-section {
+        margin-top: 30px;
+    }
+    
+    .content-title {
+        font-size: 24px;
+        font-weight: bold;
+        color: #004d40;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #a5d6a7;
+    }
+    
+    .content-text {
+        font-size: 16px;
+        line-height: 1.8;
+        color: #333;
+        margin-bottom: 20px;
+    }
+    
+    .back-link {
+        display: inline-block;
+        margin-top: 30px;
+        color: #004d40;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    
+    .back-link:hover {
+        text-decoration: underline;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="encyclopedia-detail-container">
+    <h1 class="text-center mb-4">{{ entry.title }}</h1>
+    
+    <!-- 视频播放器 -->
+    <div class="video-container">
+        <video controls>
+            <source src="{{ entry.video_url }}" type="video/mp4">
+            您的浏览器不支持视频播放
+        </video>
+    </div>
+    
+    <!-- 内容部分 -->
+    <div class="content-section">
+        <h2 class="content-title">介绍</h2>
+        <div class="content-text">{{ entry.introduction|linebreaks }}</div>
+        
+        <h2 class="content-title">历史背景</h2>
+        <div class="content-text">{{ entry.history|linebreaks }}</div>
+        
+        <h2 class="content-title">特点特色</h2>
+        <div class="content-text">{{ entry.features|linebreaks }}</div>
+        
+        <h2 class="content-title">文化价值</h2>
+        <div class="content-text">{{ entry.cultural_value|linebreaks }}</div>
+    </div>
+    
+    <a href="{% url 'wantea_encyclopedia' %}" class="back-link">← 返回皖茶百科</a>
+</div>
+{% endblock %} 

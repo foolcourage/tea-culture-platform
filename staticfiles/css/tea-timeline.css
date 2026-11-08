@@ -1,0 +1,468 @@
+/* 茶文化历史时间轴样式 */
+.timeline-container {
+    position: relative;
+    height: 100%;
+    overflow-y: auto;
+    padding: 15px 10px 15px 35px;
+    /* 优化滚动条 */
+    scrollbar-width: thin;
+    scrollbar-color: #aed581 #f5f5f5;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(0, 88, 38, 0.1);
+}
+
+.timeline-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.timeline-container::-webkit-scrollbar-track {
+    background: #f5f5f5;
+    border-radius: 10px;
+}
+
+.timeline-container::-webkit-scrollbar-thumb {
+    background-color: #aed581;
+    border-radius: 10px;
+    border: 2px solid #f5f5f5;
+}
+
+/* 茶文化历史时间轴标题区域 */
+.tea-timeline-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed rgba(0, 88, 38, 0.3);
+}
+
+.tea-leaf-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #005826;
+    color: white;
+    border-radius: 50%;
+    margin-right: 12px;
+    box-shadow: 0 3px 10px rgba(0, 88, 38, 0.3);
+    animation: rotate 10s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.tea-leaf-icon i {
+    font-size: 20px;
+    transform: rotate(-45deg);
+}
+
+.timeline-title {
+    color: #005826;
+    font-size: 22px;
+    position: relative;
+    z-index: 2;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    margin: 0;
+}
+
+/* 时间轴主曲线 */
+.timeline-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 12px;
+    width: 8px;
+    background: linear-gradient(180deg, #005826, #7cb342, #aed581, #4caf50, #d32f2f, #66bb6a);
+    /* 使用更明显的曲线效果 */
+    clip-path: polygon(
+        0 0, 100% 0,
+        100% 10%, 20% 15%, 
+        0 20%, 80% 25%,
+        100% 30%, 20% 35%,
+        0 40%, 80% 45%,
+        100% 50%, 20% 55%,
+        0 60%, 80% 65%,
+        100% 70%, 20% 75%,
+        0 80%, 80% 85%,
+        100% 90%, 0 100%
+    );
+    z-index: 1;
+    box-shadow: 0 0 15px rgba(0, 88, 38, 0.3);
+    animation: glow 3s infinite alternate;
+}
+
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 8px rgba(0, 88, 38, 0.3);
+    }
+    100% {
+        box-shadow: 0 0 20px rgba(0, 88, 38, 0.5);
+    }
+}
+
+/* 装饰元素 - 茶叶图案 */
+.timeline-container::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    width: 12px;
+    height: 24px;
+    background-color: rgba(0, 88, 38, 0.15);
+    border-radius: 50% 50% 50% 0;
+    transform: translateY(-50%) rotate(-45deg);
+    z-index: 0;
+    animation: float 5s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(-50%) rotate(-45deg) translateX(0);
+    }
+    50% {
+        transform: translateY(-50%) rotate(-45deg) translateX(5px);
+    }
+}
+
+/* 时间轴项目 */
+.timeline-item {
+    position: relative;
+    margin-bottom: 30px;
+    z-index: 2;
+    padding-left: 35px;
+    transition: all 0.3s ease;
+    /* 初始时有一些透明度和位移，用于进入动画 */
+    opacity: 0;
+    transform: translateX(-15px);
+    animation: fadeIn 0.8s forwards;
+    animation-delay: calc(var(--order, 0) * 0.15s);
+}
+
+.item-1 { --order: 1; }
+.item-2 { --order: 2; }
+.item-3 { --order: 3; }
+.item-4 { --order: 4; }
+.item-5 { --order: 5; }
+.item-6 { --order: 6; }
+.item-7 { --order: 7; }
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.timeline-item:hover {
+    transform: translateX(5px);
+}
+
+/* 连接线 - 曲线效果 */
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 3px;
+    background: linear-gradient(90deg, #005826, transparent);
+    top: 23px;
+    left: 12px;
+    z-index: 1;
+    transition: all 0.3s ease;
+    /* 添加轻微弯曲效果 */
+    transform: translateY(-50%);
+    border-radius: 50%;
+}
+
+.timeline-item:hover::before {
+    width: 40px;
+    transform: translateY(-50%) scaleY(1.5);
+}
+
+/* 时间标记点 */
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+    border: 4px solid #005826;
+    border-radius: 50%;
+    top: 15px;
+    left: -3px;
+    z-index: 2;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 0 5px rgba(0, 88, 38, 0.1);
+}
+
+.timeline-item:hover::after {
+    background-color: #005826;
+    border-color: #fff;
+    transform: scale(1.2) translateX(3px);
+    box-shadow: 0 0 15px rgba(0, 88, 38, 0.5);
+}
+
+/* 时间轴内容 */
+.timeline-content {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: all 0.3s ease;
+    border-left: 4px solid #005826;
+    overflow: hidden;
+    backdrop-filter: blur(5px);
+}
+
+.timeline-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top left, rgba(0, 88, 38, 0.05), transparent 60%);
+    z-index: 0;
+}
+
+/* 装饰茶叶背景 */
+.timeline-content::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    right: -15px;
+    width: 50px;
+    height: 50px;
+    background-image: radial-gradient(circle, rgba(0, 0, 0, 0.03) 30%, transparent 70%);
+    border-radius: 50%;
+    z-index: 0;
+    opacity: 0.5;
+}
+
+.timeline-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.timeline-date {
+    font-weight: bold;
+    color: #005826;
+    margin-bottom: 10px;
+    font-size: 18px;
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #aed581;
+    letter-spacing: 0.5px;
+}
+
+.timeline-text {
+    color: #333;
+    line-height: 1.7;
+    font-size: 15px;
+    position: relative;
+    z-index: 1;
+    text-align: justify;
+}
+
+/* 为不同时期设置不同颜色 */
+.item-1 .timeline-content {
+    border-left-color: #005826;
+}
+.item-1::after {
+    border-color: #005826;
+}
+.item-1::before {
+    background: linear-gradient(90deg, #005826, transparent);
+}
+.item-1 .timeline-date {
+    border-bottom-color: #005826;
+}
+
+.item-2 .timeline-content {
+    border-left-color: #7cb342;
+}
+.item-2::after {
+    border-color: #7cb342;
+}
+.item-2::before {
+    background: linear-gradient(90deg, #7cb342, transparent);
+}
+.item-2 .timeline-date {
+    border-bottom-color: #7cb342;
+}
+
+.item-3 .timeline-content {
+    border-left-color: #aed581;
+}
+.item-3::after {
+    border-color: #aed581;
+}
+.item-3::before {
+    background: linear-gradient(90deg, #aed581, transparent);
+}
+.item-3 .timeline-date {
+    border-bottom-color: #aed581;
+}
+
+.item-4 .timeline-content {
+    border-left-color: #4caf50;
+}
+.item-4::after {
+    border-color: #4caf50;
+}
+.item-4::before {
+    background: linear-gradient(90deg, #4caf50, transparent);
+}
+.item-4 .timeline-date {
+    border-bottom-color: #4caf50;
+}
+
+.item-5 .timeline-content {
+    border-left-color: #d32f2f;
+}
+.item-5::after {
+    border-color: #d32f2f;
+}
+.item-5::before {
+    background: linear-gradient(90deg, #d32f2f, transparent);
+}
+.item-5 .timeline-date {
+    border-bottom-color: #d32f2f;
+}
+
+.item-6 .timeline-content {
+    border-left-color: #66bb6a;
+}
+.item-6::after {
+    border-color: #66bb6a;
+}
+.item-6::before {
+    background: linear-gradient(90deg, #66bb6a, transparent);
+}
+.item-6 .timeline-date {
+    border-bottom-color: #66bb6a;
+}
+
+.item-7 .timeline-content {
+    border-left-color: #43a047;
+}
+.item-7::after {
+    border-color: #43a047;
+}
+.item-7::before {
+    background: linear-gradient(90deg, #43a047, transparent);
+}
+.item-7 .timeline-date {
+    border-bottom-color: #43a047;
+}
+
+/* 历史小知识样式 */
+.timeline-fact {
+    margin-top: 12px;
+    padding: 10px 15px;
+    background: rgba(174, 213, 129, 0.15);
+    border-left: 3px solid #aed581;
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+    line-height: 1.5;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.timeline-fact:hover {
+    background: rgba(174, 213, 129, 0.25);
+    transform: translateX(5px);
+}
+
+.timeline-fact i {
+    color: #5a9216;
+    font-size: 16px;
+    margin-top: 2px;
+}
+
+.timeline-fact span {
+    flex: 1;
+}
+
+/* 更新文本样式 */
+.timeline-text p {
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+/* 响应式调整 */
+@media (max-width: 992px) {
+    .timeline-container {
+        padding: 20px 0 20px 45px;
+    }
+    
+    .timeline-container::before {
+        left: 20px;
+    }
+    
+    .timeline-item {
+        padding-left: 45px;
+    }
+    
+    .timeline-item::after {
+        left: 5px;
+    }
+    
+    .timeline-item::before {
+        left: 22px;
+    }
+    
+    .timeline-container::after {
+        left: 18px;
+    }
+    
+    .tea-timeline-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .tea-leaf-icon {
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .timeline-container {
+        padding: 20px 0 20px 35px;
+    }
+    
+    .timeline-item {
+        padding-left: 35px;
+    }
+    
+    .timeline-item::after {
+        left: 0;
+    }
+    
+    .timeline-item::before {
+        left: 17px;
+    }
+    
+    .timeline-container::before {
+        left: 15px;
+    }
+    
+    .timeline-container::after {
+        left: 13px;
+    }
+} 

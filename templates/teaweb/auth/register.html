@@ -1,0 +1,104 @@
+{% extends 'teaweb/base.html' %}
+{% load static %}
+
+{% block title %}注册 - 安徽省茶文化{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-card">
+        <h2 class="auth-title">茶乡居民登记</h2>
+        <p class="auth-subtitle">加入我们，探索安徽茶文化的奇妙之旅</p>
+        
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+        <form method="post" class="auth-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_username">用户名</label>
+                {{ form.username }}
+                <div class="help-text">用户名长度应为150个字符或更少，只能包含字母、数字和 @/./+/-/_ 字符。</div>
+                {% if form.username.errors %}
+                <div class="error-message">
+                    {% for error in form.username.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            
+            <div class="form-group">
+                <label for="id_email">邮箱</label>
+                {{ form.email }}
+                <div class="help-text">请输入有效的电子邮箱地址。</div>
+                {% if form.email.errors %}
+                <div class="error-message">
+                    {% for error in form.email.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            
+            <div class="form-group">
+                <label for="id_password1">密码</label>
+                {{ form.password1 }}
+                <div class="help-text">
+                    密码不能与个人信息太相似；
+                    至少包含8个字符；
+                    不能是常见密码；
+                    不能全为数字。
+                </div>
+                {% if form.password1.errors %}
+                <div class="error-message">
+                    {% for error in form.password1.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            
+            <div class="form-group">
+                <label for="id_password2">确认密码</label>
+                {{ form.password2 }}
+                <div class="help-text">请再次输入密码进行确认。</div>
+                {% if form.password2.errors %}
+                <div class="error-message">
+                    {% for error in form.password2.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="auth-button">创建账号</button>
+            </div>
+        </form>
+        
+        <div class="divider">或者</div>
+        
+        <div class="auth-links">
+            <p>已有账号？<a href="{% url 'login' %}">立即登录</a></p>
+        </div>
+        
+        <svg class="tea-leaf-decoration" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path fill="#367c2b" d="M256,0C115.3,0,0,115.3,0,256s115.3,256,256,256s256-115.3,256-256S396.7,0,256,0z M256,448
+            c-106,0-192-86-192-192S150,64,256,64s192,86,192,192S362,448,256,448z"/>
+            <path fill="#367c2b" d="M256,128c-70.7,0-128,57.3-128,128s57.3,128,128,128s128-57.3,128-128S326.7,128,256,128z M256,320
+            c-35.3,0-64-28.7-64-64s28.7-64,64-64s64,28.7,64,64S291.3,320,256,320z"/>
+        </svg>
+    </div>
+</div>
+{% endblock %} 

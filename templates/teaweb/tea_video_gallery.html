@@ -1,0 +1,130 @@
+{% extends 'teaweb/base.html' %}
+{% load static %}
+
+{% block title %}安徽茶文化3D体验{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* 隐藏基础模板中的视频播放区域 */
+    #tea-video-container {
+        display: none !important;
+    }
+    
+    /* 页面主体样式 */
+    .page-container {
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 30px 0;
+        background-color: #f9f7f2;
+    }
+    
+    .page-title {
+        font-size: 2.2rem;
+        color: #2c7744;
+        text-align: center;
+        margin-bottom: 25px;
+        font-weight: 600;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+    
+    .page-description {
+        max-width: 800px;
+        text-align: center;
+        margin-bottom: 30px;
+        color: #555;
+        line-height: 1.6;
+        font-size: 1.1rem;
+    }
+    
+    /* Unity渲染区域样式 */
+    .unity-container {
+        width: 90%;
+        max-width: 1200px;
+        height: 75vh;
+        position: relative;
+        overflow: hidden;
+        margin: 0 auto;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        border: 5px solid #fff;
+        background-color: #000;
+    }
+    
+    .unity-iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+    
+    /* 恢复页面头部和底部 */
+    header, footer {
+        display: block;
+    }
+    
+    /* 响应式调整 */
+    @media (max-width: 768px) {
+        .unity-container {
+            height: 60vh;
+            width: 95%;
+        }
+        
+        .page-title {
+            font-size: 1.8rem;
+        }
+        
+        .page-description {
+            font-size: 1rem;
+            padding: 0 15px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h1 class="page-title">安徽茶文化3D虚拟体验</h1>
+    <p class="page-description">
+        通过这个交互式3D场景，您可以身临其境地体验安徽茶文化的魅力。
+        使用鼠标或触摸屏幕来探索这个精心制作的虚拟茶文化环境。
+    </p>
+    
+    <div class="unity-container">
+        <iframe class="unity-iframe" src="https://cloudrendering.unity.cn/share/c8d641aa660edaf1" allowfullscreen></iframe>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 确保视频区域不显示
+        const videoContainer = document.getElementById('tea-video-container');
+        if (videoContainer) {
+            videoContainer.style.display = 'none';
+            videoContainer.style.visibility = 'hidden';
+            videoContainer.style.height = '0';
+            videoContainer.style.width = '0';
+            videoContainer.style.overflow = 'hidden';
+        }
+        
+        // 调整容器高度以确保内容居中
+        function adjustHeight() {
+            const pageContainer = document.querySelector('.page-container');
+            const windowHeight = window.innerHeight;
+            const containerHeight = pageContainer.offsetHeight;
+            
+            if (containerHeight < windowHeight) {
+                pageContainer.style.minHeight = windowHeight + 'px';
+            }
+        }
+        
+        // 页面加载和窗口大小改变时调整高度
+        window.addEventListener('load', adjustHeight);
+        window.addEventListener('resize', adjustHeight);
+    });
+</script>
+{% endblock %} 

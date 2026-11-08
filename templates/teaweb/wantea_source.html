@@ -1,0 +1,215 @@
+{% extends 'teaweb/base.html' %}
+{% load static %}
+
+{% block title %}皖茶源 - 安徽省茶文化{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/image-gallery.css' %}">
+<link rel="stylesheet" href="{% static 'css/tea-map.css' %}">
+<link rel="stylesheet" href="{% static 'css/tea-timeline.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="gallery-container">
+    <div class="image-gallery">
+        <div class="image active" data-index="0">
+            <img src="{% static 'images/tea1.jpg' %}" alt="安徽茶图片1">
+        </div>
+        <div class="image" data-index="1">
+            <img src="{% static 'images/tea2.jpg' %}" alt="安徽茶图片2">
+        </div>
+        <div class="image" data-index="2">
+            <img src="{% static 'images/tea3.jpg' %}" alt="安徽茶图片3">
+        </div>
+        <div class="image" data-index="3">
+            <img src="{% static 'images/tea4.jpg' %}" alt="安徽茶图片4">
+        </div>
+        <div class="image" data-index="4">
+            <img src="{% static 'images/tea5.jpg' %}" alt="安徽茶图片5">
+        </div>
+    </div>
+    
+    <!-- 添加左右导航按钮 -->
+    <div class="gallery-nav prev-btn">
+        <i class="fas fa-chevron-left"></i>
+    </div>
+    <div class="gallery-nav next-btn">
+        <i class="fas fa-chevron-right"></i>
+    </div>
+    
+    <!-- 添加指示器 -->
+    <div class="gallery-indicators">
+        <div class="indicator active" data-index="0"></div>
+        <div class="indicator" data-index="1"></div>
+        <div class="indicator" data-index="2"></div>
+        <div class="indicator" data-index="3"></div>
+        <div class="indicator" data-index="4"></div>
+    </div>
+    
+    <!-- 添加旋转提示图标 -->
+    <div class="rotation-hint">
+        <i class="fas fa-sync-alt"></i>
+    </div>
+</div>
+
+<!-- 安徽茶叶地图和历史时间轴区域 -->
+<div class="tea-map-container">
+    <h2 class="tea-map-title">安徽茶文化与历史</h2>
+    <div class="tea-map-description">
+        <p>安徽省是中国著名的传统产茶区域，自古以来就有"茶乡"之称。这片土地孕育了黄山毛峰、祁门红茶、太平猴魁、六安瓜片等多种闻名中外的名茶，茶文化历史可追溯至唐代。不同历史时期，安徽茶叶的发展与演变见证了中国茶文化的兴衰更替，形成了独具特色的"皖茶韵"。</p>
+    </div>
+    
+    <div class="map-timeline-wrapper">
+        <!-- 左侧地图 -->
+        <div class="tea-map-wrapper">
+            <h3 class="section-subtitle">安徽名茶分布图</h3>
+            <div class="anhui-map">
+                <img src="{% static 'images/anhui-map.png' %}" alt="安徽省地图" class="province-map">
+                
+                <!-- 茶叶地标点 -->
+                <div class="tea-marker" id="huangshan-marker" data-tea="huangshan" style="top: 87%; left: 68%;">
+                    <div class="marker-dot"></div>
+                    <div class="marker-label">黄山毛峰</div>
+                </div>
+                
+                <div class="tea-marker" id="luian-marker" data-tea="luian" style="top: 54%; left: 26%;">
+                    <div class="marker-dot"></div>
+                    <div class="marker-label">六安瓜片</div>
+                </div>
+                
+                <div class="tea-marker" id="taiping-marker" data-tea="taiping" style="top: 81%; left: 64%;">
+                    <div class="marker-dot"></div>
+                    <div class="marker-label">太平猴魁</div>
+                </div>
+                
+                <div class="tea-marker" id="qimen-marker" data-tea="qimen" style="top: 87%; left: 54%;">
+                    <div class="marker-dot"></div>
+                    <div class="marker-label">祁门红茶</div>
+                </div>
+                
+                <div class="tea-marker" id="jingting-marker" data-tea="jingting" style="top: 75%; left: 83%;">
+                    <div class="marker-dot"></div>
+                    <div class="marker-label">敬亭绿雪</div>
+                </div>
+            </div>
+            
+            <div class="map-legend">
+                <div class="legend-item">
+                    <span class="legend-dot"></span>
+                    <span class="legend-text">茶叶产地</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右侧时间轴 -->
+        <div class="timeline-section">
+            <h3 class="section-subtitle">安徽茶文化历史</h3>
+            <div class="timeline-container">
+                <div class="tea-timeline-header">
+                    <div class="tea-leaf-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h4 class="timeline-title">千年茶韵 · 安徽茶史</h4>
+                </div>
+                
+                <div class="timeline-item item-1">
+                    <div class="timeline-content">
+                        <div class="timeline-date">唐代 (618-907)</div>
+                        <div class="timeline-text">
+                            <p>安徽茶文化兴起于唐代。唐朝陆羽所著《茶经》中记载了当时黄山一带的茶叶。敬亭绿雪起源于此时期，相传唐代诗人李白游览敬亭山时品尝并赞美当地茶叶。</p>
+                            <div class="timeline-fact">
+                                <i class="fas fa-seedling"></i> 
+                                <span>茶圣陆羽在《茶经》中记载:"雉山甘重，故宜茶"，指的就是今安徽六安附近产茶区。</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item item-2">
+                    <div class="timeline-content">
+                        <div class="timeline-date">宋代 (960-1279)</div>
+                        <div class="timeline-text">
+                            <p>宋代，安徽茶区进一步扩大，成为全国重要的产茶区域之一。当时黄山一带产茶区被列为"贡茶区"，向皇室贡茶。徽州茶叶贸易开始繁荣。</p>
+                            <div class="timeline-fact">
+                                <i class="fas fa-crown"></i>
+                                <span>宋徽宗赵佶亲自撰写《大观茶论》，对于当时徽州茶区的茶叶推崇备至。</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item item-3">
+                    <div class="timeline-content">
+                        <div class="timeline-date">明代 (1368-1644)</div>
+                        <div class="timeline-text">
+                            <p>明代，安徽六安瓜片问世，成为历史名茶。同时，徽州茶商崛起，形成了著名的"徽州茶号"，徽商控制了长江中下游的茶叶贸易。</p>
+                            <div class="timeline-fact">
+                                <i class="fas fa-shopping-bag"></i>
+                                <span>明代徽州茶商足迹遍布全国，"无徽不成镇"成为当时的商业现象。</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item item-4">
+                    <div class="timeline-content">
+                        <div class="timeline-date">清代 (1644-1911)</div>
+                        <div class="timeline-text">
+                            <p>黄山毛峰由谢裕泰创制成功，迅速成为名茶。同期，祁门红茶由徽州茶商引进武夷山制茶技艺后创制成功，开创了安徽红茶新篇章。</p>
+                            <div class="timeline-fact">
+                                <i class="fas fa-medal"></i>
+                                <span>1875年，胡元龙创制祁门红茶，1915年巴拿马万国博览会上获金奖。</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item item-5">
+                    <div class="timeline-content">
+                        <div class="timeline-date">民国时期 (1912-1949)</div>
+                        <div class="timeline-text">
+                            <p>安徽名茶开始远销海外，特别是祁门红茶成为著名的英式下午茶原料，在国际市场上享有盛誉，被誉为"红茶皇后"。</p>
+                            <div class="timeline-fact">
+                                <i class="fas fa-ship"></i>
+                                <span>民国时期，英国王室钦点祁门红茶为皇家专用茶，享誉全球。</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item item-6">
+                    <div class="timeline-content">
+                        <div class="timeline-date">20世纪中后期</div>
+                        <div class="timeline-text">
+                            <p>安徽茶区恢复生产，六大茶类全面发展。太平猴魁、黄山毛峰、祁门红茶、六安瓜片等多个品种入选中国十大名茶。</p>
+                            <div class="timeline-fact">
+                                <i class="fas fa-chart-line"></i>
+                                <span>1979年，安徽茶叶出口创汇首次突破千万美元。</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item item-7">
+                    <div class="timeline-content">
+                        <div class="timeline-date">当代 (2000年至今)</div>
+                        <div class="timeline-text">
+                            <p>安徽茶产业走向现代化，多个茶区获得国家地理标志保护。安徽茶叶年产量超10万吨，形成集种植、加工、科研、文化、旅游为一体的完整产业链。</p>
+                            <div class="timeline-fact">
+                                <i class="fas fa-globe-asia"></i>
+                                <span>2022年，安徽茶产业总产值超过500亿元，成为乡村振兴的重要支柱。</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/image-gallery.js' %}"></script>
+<script src="{% static 'js/tea-map.js' %}"></script>
+<script src="{% static 'js/sound-generator.js' %}"></script>
+{% endblock %} 

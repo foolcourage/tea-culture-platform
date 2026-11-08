@@ -1,0 +1,419 @@
+{% extends 'teaweb/base.html' %}
+{% load static %}
+
+{% block title %}皖茶百科 - 安徽省茶文化{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/encyclopedia.css' %}">
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+{% endblock %}
+
+{% block content %}
+<div class="encyclopedia-container">
+    <!-- 装饰元素 -->
+    <div class="leaf-decoration leaf-top-left">
+        <i class="fas fa-leaf"></i>
+    </div>
+    <div class="leaf-decoration leaf-bottom-right">
+        <i class="fas fa-leaf"></i>
+    </div>
+    
+    <!-- 标题区域 -->
+    <div class="page-title-container">
+        <h1 class="page-title">皖茶百科</h1>
+        <p class="page-subtitle">安徽省是中国著名的传统产茶区域，自古以来就有"茶乡"之称。这里孕育了众多闻名中外的名茶，各具独特风味与品质特点。</p>
+    </div>
+    
+    <div class="tea-categories">
+        <div class="tea-item" data-aos="fade-up" data-aos-delay="100">
+            <a href="{% url 'tea_detail' 'huangshan' %}">
+                <div class="tea-image">
+                    <img src="{% static 'images/huangshan.jpg' %}" alt="黄山毛峰">
+                    <span class="tea-category">绿茶</span>
+                </div>
+                <div class="tea-content">
+                    <h3 class="tea-name">黄山毛峰</h3>
+                    <p class="tea-desc">黄山毛峰，中国传统名茶，属于绿茶类，产于安徽省黄山市，具有外形美观、香气高锐、滋味醇厚等特点。</p>
+                    <span class="view-more"><i class="fas fa-info-circle tea-info-icon"></i>查看详情</span>
+                </div>
+            </a>
+        </div>
+        
+        <div class="tea-item" data-aos="fade-up" data-aos-delay="200">
+            <a href="{% url 'tea_detail' 'qimen' %}">
+                <div class="tea-image">
+                    <img src="{% static 'images/qimen.jpg' %}" alt="祁门红茶">
+                    <span class="tea-category">红茶</span>
+                </div>
+                <div class="tea-content">
+                    <h3 class="tea-name">祁门红茶</h3>
+                    <p class="tea-desc">祁门红茶，中国十大名茶之一，产于安徽省祁门县，具有"香高、味醇、形美、色艳"的特点，享誉世界。</p>
+                    <span class="view-more"><i class="fas fa-info-circle tea-info-icon"></i>查看详情</span>
+                </div>
+            </a>
+        </div>
+        
+        <div class="tea-item" data-aos="fade-up" data-aos-delay="300">
+            <a href="{% url 'tea_detail' 'taiping' %}">
+                <div class="tea-image">
+                    <img src="{% static 'images/taiping.jpg' %}" alt="太平猴魁">
+                    <span class="tea-category">绿茶</span>
+                </div>
+                <div class="tea-content">
+                    <h3 class="tea-name">太平猴魁</h3>
+                    <p class="tea-desc">太平猴魁，中国传统名茶，属于绿茶类，产于安徽省黄山市太平县，外形扁平挺直，匀整显毫，香气清高持久。</p>
+                    <span class="view-more"><i class="fas fa-info-circle tea-info-icon"></i>查看详情</span>
+                </div>
+            </a>
+        </div>
+        
+        <div class="tea-item" data-aos="fade-up" data-aos-delay="400">
+            <a href="{% url 'tea_detail' 'luian' %}">
+                <div class="tea-image">
+                    <img src="{% static 'images/luian.jpg' %}" alt="六安瓜片">
+                    <span class="tea-category">绿茶</span>
+                </div>
+                <div class="tea-content">
+                    <h3 class="tea-name">六安瓜片</h3>
+                    <p class="tea-desc">六安瓜片，中国传统名茶，属于绿茶类，产于安徽省六安市，其特点是条索肥壮、扁平、光滑，叶色苍绿。</p>
+                    <span class="view-more"><i class="fas fa-info-circle tea-info-icon"></i>查看详情</span>
+                </div>
+            </a>
+        </div>
+        
+        <div class="tea-item" data-aos="fade-up" data-aos-delay="500">
+            <a href="{% url 'tea_detail' 'jingting' %}">
+                <div class="tea-image">
+                    <img src="{% static 'images/jingting.jpg' %}" alt="敬亭绿雪">
+                    <span class="tea-category">绿茶</span>
+                </div>
+                <div class="tea-content">
+                    <h3 class="tea-name">敬亭绿雪</h3>
+                    <p class="tea-desc">敬亭绿雪，安徽省宣城市的特色茶叶，色泽翠绿，香气清高，滋味鲜爽，具有独特的地方特色。</p>
+                    <span class="view-more"><i class="fas fa-info-circle tea-info-icon"></i>查看详情</span>
+                </div>
+            </a>
+        </div>
+    </div>
+    
+    <!-- 社区互动区域 -->
+    <div class="community-section" data-aos="fade-up">
+        <h2 class="section-title">茶友交流</h2>
+        <p class="section-subtitle">分享您的茶文化体验，获取专业的茶叶知识</p>
+        
+        <div class="community-wrapper" data-user-authenticated="{% if user.is_authenticated %}true{% else %}false{% endif %}" data-login-url="{% url 'login' %}?next={{ request.path }}">
+            <!-- 论坛评论区 -->
+            <div class="forum-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-comments"></i> 茶友论坛</h3>
+                    <!-- <span class="comment-count">28条讨论</span> -->
+                </div>
+                
+                <div class="comments-container">
+                    <!-- 评论列表 -->
+                    {% if tea_comments %}
+                        {% for comment in tea_comments %}
+                            <div class="comment-item" data-comment-id="{{ comment.id }}">
+                                <div class="comment-avatar">
+                                    <img src="{{ comment.user.profile.avatar_url|default:'static/images/default-avatar.jpg' }}" alt="{{ comment.user.username }}">
+                                </div>
+                                <div class="comment-content">
+                                    <div class="comment-header">
+                                        <span class="comment-author">{{ comment.user.username }}</span>
+                                        <span class="comment-date">{{ comment.created_at|date:"Y-m-d" }}</span>
+                                    </div>
+                                    <div class="comment-text">
+                                        {{ comment.content }}
+                                    </div>
+                                    <div class="comment-actions">
+                                        <span class="{% if comment.is_liked_by_user %}liked{% endif %}">
+                                            <i class="{% if comment.is_liked_by_user %}fas{% else %}far{% endif %} fa-thumbs-up"></i> {{ comment.likes_count }}
+                                        </span>
+                                        <span><i class="far fa-comment"></i> 回复</span>
+                                        <span><i class="far fa-share-square"></i> 分享</span>
+                                    </div>
+                                    
+                                    <!-- 回复 -->
+                                    {% if comment.replies.exists %}
+                                        <div class="comment-replies">
+                                            {% for reply in comment.replies.all %}
+                                                <div class="reply-item" data-reply-id="{{ reply.id }}">
+                                                    <div class="comment-avatar">
+                                                        <img src="{{ reply.user.profile.avatar_url|default:'static/images/default-avatar.jpg' }}" alt="{{ reply.user.username }}">
+                                                    </div>
+                                                    <div class="comment-content">
+                                                        <div class="comment-header">
+                                                            <span class="comment-author">{{ reply.user.username }}</span>
+                                                            <span class="comment-date">{{ reply.created_at|date:"Y-m-d" }}</span>
+                                                        </div>
+                                                        <div class="comment-text">
+                                                            {{ reply.content }}
+                                                        </div>
+                                                        <div class="comment-actions">
+                                                            <span class="{% if reply.is_liked_by_user %}liked{% endif %}">
+                                                                <i class="{% if reply.is_liked_by_user %}fas{% else %}far{% endif %} fa-thumbs-up"></i> {{ reply.likes_count }}
+                                                            </span>
+                                                            <span><i class="far fa-comment"></i> 回复</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="no-comments">
+                            <p>暂无评论，成为第一个评论的人吧！</p>
+                        </div>
+                    {% endif %}
+                    
+                    {% comment %}
+                    <!-- 这些是静态展示的示例评论，实际项目中应删除 -->
+                    <div class="comment-item" data-comment-id="example-1">
+                        <div class="comment-avatar">
+                            <img src="{% static 'images/avatar1.jpg' %}" alt="用户头像">
+                        </div>
+                        <div class="comment-content">
+                            <div class="comment-header">
+                                <span class="comment-author">茶友_张三</span>
+                                <span class="comment-date">2025-04-20</span>
+                            </div>
+                            <div class="comment-text">
+                                最近尝试了一款黄山毛峰，茶汤清澈，香气高锐持久，滋味鲜爽甘醇，真的很不错！想请教下各位茶友，冲泡黄山毛峰最佳的水温是多少？
+                            </div>
+                            <div class="comment-actions">
+                                <span><i class="far fa-thumbs-up"></i> 12</span>
+                                <span><i class="far fa-comment"></i> 回复</span>
+                                <span><i class="far fa-share-square"></i> 分享</span>
+                            </div>
+                            
+                            <!-- 回复 -->
+                            <div class="comment-replies">
+                                <div class="reply-item" data-reply-id="example-reply-1">
+                                    <div class="comment-avatar">
+                                        <img src="{% static 'images/avatar2.jpg' %}" alt="用户头像">
+                                    </div>
+                                    <div class="comment-content">
+                                        <div class="comment-header">
+                                            <span class="comment-author">茶叶专家_李四</span>
+                                            <span class="comment-date">2025-04-21</span>
+                                        </div>
+                                        <div class="comment-text">
+                                            黄山毛峰最佳冲泡水温为80-85℃，水温过高会破坏茶叶中的氨基酸等成分，影响口感和香气。另外，投茶量建议3-5克，冲泡时间约1分钟。
+                                        </div>
+                                        <div class="comment-actions">
+                                            <span><i class="far fa-thumbs-up"></i> 8</span>
+                                            <span><i class="far fa-comment"></i> 回复</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="comment-item" data-comment-id="example-2">
+                        <div class="comment-avatar">
+                            <img src="{% static 'images/avatar3.jpg' %}" alt="用户头像">
+                        </div>
+                        <div class="comment-content">
+                            <div class="comment-header">
+                                <span class="comment-author">茶友_王五</span>
+                                <span class="comment-date">2025-04-19</span>
+                            </div>
+                            <div class="comment-text">
+                                想请教一下，六安瓜片为什么没有芽头？它与其他绿茶在制作工艺上有什么不同？
+                            </div>
+                            <div class="comment-actions">
+                                <span><i class="far fa-thumbs-up"></i> 9</span>
+                                <span><i class="far fa-comment"></i> 回复</span>
+                                <span><i class="far fa-share-square"></i> 分享</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endcomment %}
+                </div>
+                
+                <!-- 添加评论 -->
+                <div class="add-comment">
+                    <h4>发表评论</h4>
+                    {% if user.is_authenticated %}
+                        <form class="comment-form" method="post" action="{% url 'post_tea_comment' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="page_type" value="encyclopedia">
+                            <div class="comment-user-info">
+                                <img src="{{ user.profile.avatar_url|default:'static/images/default-avatar.jpg' }}" alt="{{ user.username }}" class="comment-user-avatar">
+                                <span class="comment-user-name">{{ user.username }}</span>
+                            </div>
+                            <textarea name="comment_content" placeholder="分享您对安徽茶叶的见解和问题..."></textarea>
+                            <button type="submit" class="btn-submit">发布评论</button>
+                        </form>
+                    {% else %}
+                        <div class="login-required">
+                            <p>您需要<a href="{% url 'login' %}?next={{ request.path }}">登录</a>后才能发表评论</p>
+                            <a href="{% url 'login' %}?next={{ request.path }}" class="btn-login">登录</a>
+                            <span class="login-separator">或</span>
+                            <a href="{% url 'register' %}?next={{ request.path }}" class="btn-register">注册</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- 专家问答区 -->
+            <div class="expert-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-user-graduate"></i> 专家问答</h3>
+                    <a href="#" class="view-all">查看全部</a>
+                </div>
+                
+                <div class="expert-qa-list">
+                    <div class="expert-qa-item">
+                        <div class="expert-info">
+                            <img src="{% static 'images/expert1.jpg' %}" alt="专家头像" class="expert-avatar">
+                            <div>
+                                <span class="expert-name">陈茶师 - 茶艺大师</span>
+                                <span class="expert-title">国家级非遗传承人</span>
+                            </div>
+                        </div>
+                        <div class="qa-content">
+                            <div class="question">
+                                <span class="q-icon">问</span>
+                                <p>如何辨别真正的祁门红茶？市场上仿冒品较多，想知道有什么简单的方法区分。</p>
+                            </div>
+                            <div class="answer">
+                                <span class="a-icon">答</span>
+                                <p>辨别真正的祁门红茶可从以下几点入手：一看外形，正宗祁门红茶条索紧细均匀，锋苗秀丽；二闻香气，具有特有的"祁门香"，类似于兰花香或酒香；三观汤色，应为红艳明亮，不浑浊；四尝滋味，醇厚甘鲜，回甘明显。此外，正规渠道购买并查看包装上的产地证明也很重要。</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="expert-qa-item">
+                        <div class="expert-info">
+                            <img src="{% static 'images/expert2.jpg' %}" alt="专家头像" class="expert-avatar">
+                            <div>
+                                <span class="expert-name">王教授 - 茶学研究员</span>
+                                <span class="expert-title">安徽农业大学</span>
+                            </div>
+                        </div>
+                        <div class="qa-content">
+                            <div class="question">
+                                <span class="q-icon">问</span>
+                                <p>安徽各地茶叶品质差异较大，是受什么因素影响最大？</p>
+                            </div>
+                            <div class="answer">
+                                <span class="a-icon">答</span>
+                                <p>安徽各地茶叶品质差异主要受地理环境因素影响。"一山一水一茶"，不同地区的海拔、土壤、气候、降水等生态环境因素综合作用，造就了茶叶品质的差异。例如黄山区域多云雾，昼夜温差大，使茶叶中氨基酸积累丰富，形成黄山毛峰、太平猴魁的独特风味；而祁门县气候温和湿润，适合红茶发酵，产出祁门红茶。此外，不同的茶树品种和制作工艺也是影响茶叶品质的重要因素。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 专家图片展示 -->
+                <div class="expert-gallery">
+                    <h4>专家茶艺展示</h4>
+                    <div class="gallery-images">
+                        <div class="gallery-item">
+                            <img src="{% static 'images/tea-ceremony1.jpg' %}" alt="茶艺展示">
+                            <span class="gallery-caption">传统功夫茶艺</span>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="{% static 'images/tea-ceremony2.jpg' %}" alt="茶艺展示">
+                            <span class="gallery-caption">安徽茶艺表演</span>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="{% static 'images/tea-planting.jpg' %}" alt="茶园种植">
+                            <span class="gallery-caption">生态茶园考察</span>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="{% static 'images/tea-processing.jpg' %}" alt="茶叶加工">
+                            <span class="gallery-caption">茶叶制作工艺</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<!-- AOS动画库 -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 初始化AOS动画
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+        
+        // 评论提交处理
+        const commentForm = document.querySelector('.comment-form');
+        if (commentForm) {
+            commentForm.addEventListener('submit', function(e) {
+                const textarea = this.querySelector('textarea');
+                if (textarea.value.trim() === '') {
+                    e.preventDefault();
+                    alert('评论内容不能为空！');
+                    return false;
+                }
+                
+                // 评论提交中添加加载状态
+                const submitBtn = this.querySelector('.btn-submit');
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '提交中...';
+                
+                // 表单正常提交到后端，无需阻止默认事件
+            });
+        }
+        
+        // 处理评论操作按钮点击
+        const commentActions = document.querySelectorAll('.comment-actions span');
+        const communityWrapper = document.querySelector('.community-wrapper');
+        const isAuthenticated = communityWrapper.dataset.userAuthenticated === 'true';
+        const loginUrl = communityWrapper.dataset.loginUrl;
+        
+        commentActions.forEach(action => {
+            action.addEventListener('click', function(e) {
+                if (isAuthenticated) {
+                    // 根据不同操作类型处理
+                    if (this.querySelector('.fa-thumbs-up')) {
+                        // 点赞操作
+                        const likeCount = this.textContent.trim();
+                        const isLiked = this.classList.contains('liked');
+                        
+                        // 这里应该发送AJAX请求到后端处理点赞
+                        // 示例代码，实际项目中替换为真实的AJAX请求
+                        console.log('点赞操作');
+                        
+                        // 模拟前端效果
+                        if (isLiked) {
+                            this.classList.remove('liked');
+                            this.innerHTML = `<i class="far fa-thumbs-up"></i> ${parseInt(likeCount) - 1}`;
+                        } else {
+                            this.classList.add('liked');
+                            this.innerHTML = `<i class="fas fa-thumbs-up"></i> ${parseInt(likeCount) + 1}`;
+                        }
+                    } else if (this.querySelector('.fa-comment')) {
+                        // 回复操作
+                        // 获取相关评论ID
+                        const commentId = this.closest('.comment-item').dataset.commentId;
+                        // 这里添加显示回复表单的逻辑
+                        console.log('回复操作, 评论ID:', commentId);
+                    } else if (this.querySelector('.fa-share-square')) {
+                        // 分享操作
+                        console.log('分享操作');
+                    }
+                } else {
+                    // 未登录状态下，提示登录
+                    if (confirm('您需要登录后才能执行此操作，是否立即登录？')) {
+                        window.location.href = loginUrl;
+                    }
+                }
+            });
+        });
+    });
+</script>
+{% endblock %} 

@@ -1,0 +1,654 @@
+/* 个人中心主样式 */
+:root {
+  --primary-color: #4a8f52;
+  --primary-dark: #3a7442;
+  --primary-light: #e9f2eb;
+  --secondary-color: #e9f2eb;
+  --text-color: #333;
+  --text-light: #666;
+  --gray-light: #f5f8f5;
+  --white: #fff;
+  --danger: #dc3545;
+  --success: #28a745;
+  --info: #17a2b8;
+  --warning: #ffc107;
+  --border-radius: 10px;
+  --shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  --transition: all 0.3s ease;
+}
+
+body {
+  background-color: #f8f9fa;
+  position: relative;
+}
+
+body:before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(rgba(74, 143, 82, 0.03) 1px, transparent 1px);
+  background-size: 25px 25px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.profile-container {
+  max-width: 1200px;
+  margin: 3rem auto;
+  padding: 0 15px;
+  position: relative;
+}
+
+/* 茶叶装饰元素 */
+.profile-container:before,
+.profile-container:after {
+  content: '\f06c'; /* leaf icon from FontAwesome */
+  font-family: "Font Awesome 5 Free";
+  position: absolute;
+  font-size: 8rem;
+  color: rgba(74, 143, 82, 0.05);
+  z-index: -1;
+}
+
+.profile-container:before {
+  top: -40px;
+  left: -40px;
+  transform: rotate(-15deg);
+}
+
+.profile-container:after {
+  bottom: 40px;
+  right: -40px;
+  transform: rotate(15deg);
+}
+
+/* 消息提醒样式 */
+.messages {
+  margin-bottom: 2rem;
+}
+
+.alert {
+  padding: 1rem 1.5rem;
+  border-radius: var(--border-radius);
+  margin-bottom: 1rem;
+  border: none;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.alert:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  margin-right: 10px;
+}
+
+.alert-success {
+  background-color: rgba(40, 167, 69, 0.1);
+  color: var(--success);
+  border-left: 4px solid var(--success);
+}
+
+.alert-success:before {
+  content: "\f058"; /* check-circle */
+}
+
+.alert-danger {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: var(--danger);
+  border-left: 4px solid var(--danger);
+}
+
+.alert-danger:before {
+  content: "\f057"; /* times-circle */
+}
+
+.alert-info {
+  background-color: rgba(23, 162, 184, 0.1);
+  color: var(--info);
+  border-left: 4px solid var(--info);
+}
+
+.alert-info:before {
+  content: "\f05a"; /* info-circle */
+}
+
+.alert-warning {
+  background-color: rgba(255, 193, 7, 0.1);
+  color: var(--warning);
+  border-left: 4px solid var(--warning);
+}
+
+.alert-warning:before {
+  content: "\f06a"; /* exclamation-circle */
+}
+
+/* 按钮样式 */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 50px;
+  transition: var(--transition);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  font-size: 0.9rem;
+}
+
+.btn i {
+  margin-right: 5px;
+  font-size: 0.9rem;
+}
+
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8rem;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  color: var(--white);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(74, 143, 82, 0.3);
+}
+
+.btn-outline-primary {
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  background-color: transparent;
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary-color);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(74, 143, 82, 0.2);
+}
+
+.btn-outline-danger {
+  color: var(--danger);
+  border: 1px solid var(--danger);
+  background-color: transparent;
+}
+
+.btn-outline-danger:hover {
+  background-color: var(--danger);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(220, 53, 69, 0.2);
+}
+
+.btn-outline-secondary {
+  color: var(--text-light);
+  border: 1px solid #ccc;
+  background-color: transparent;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #f8f9fa;
+  color: var(--text-color);
+  transform: translateY(-2px);
+}
+
+/* 卡片和内容区域 */
+.profile-section {
+  margin-bottom: 2rem;
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  overflow: hidden;
+  border-top: 3px solid var(--primary-color);
+  position: relative;
+}
+
+.profile-section:hover {
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px);
+}
+
+.profile-section:after {
+  content: '\f06c'; /* leaf icon */
+  font-family: "Font Awesome 5 Free";
+  position: absolute;
+  bottom: -20px;
+  right: -10px;
+  font-size: 5rem;
+  color: rgba(74, 143, 82, 0.05);
+  transform: rotate(30deg);
+  z-index: 0;
+}
+
+.profile-section h2 {
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #f0f0f0;
+  position: relative;
+  z-index: 1;
+}
+
+.profile-section h2 i {
+  color: var(--primary-color);
+  margin-right: 0.5rem;
+}
+
+/* 个人信息卡片样式改进 */
+.profile-header {
+  background-color: #fff;
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+  border-top: 3px solid var(--primary-color);
+  transition: var(--transition);
+}
+
+.profile-header:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 150px;
+  height: 150px;
+  background-color: var(--primary-light);
+  border-radius: 0 0 0 100%;
+  opacity: 0.5;
+  z-index: 0;
+}
+
+.profile-header:after {
+  content: '\f06c'; /* leaf icon */
+  font-family: "Font Awesome 5 Free";
+  position: absolute;
+  font-weight: 900;
+  bottom: 10px;
+  right: 15px;
+  font-size: 4rem;
+  color: rgba(74, 143, 82, 0.05);
+  transform: rotate(15deg);
+  z-index: 0;
+}
+
+.profile-avatar-container {
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+}
+
+.profile-avatar {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #fff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-avatar:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.profile-info-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.profile-name {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+  position: relative;
+  z-index: 1;
+}
+
+.profile-username {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.profile-username:before {
+  content: '@';
+  margin-right: 2px;
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.profile-meta {
+  margin-top: 0.8rem;
+  color: #666;
+  position: relative;
+  z-index: 1;
+  font-size: 0.95rem;
+}
+
+.profile-meta i {
+  margin-right: 0.5rem;
+  color: var(--primary-color);
+}
+
+.profile-actions {
+  margin-top: 1.2rem;
+  display: flex;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.profile-actions .btn {
+  padding: 0.45rem 1rem;
+}
+
+/* 侧边栏样式 */
+.profile-sidebar {
+  background-color: #fff;
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  border-top: 3px solid var(--primary-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-sidebar:hover {
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.profile-sidebar:after {
+  content: '\f06c'; /* leaf icon */
+  font-family: "Font Awesome 5 Free";
+  position: absolute;
+  font-weight: 900;
+  bottom: -15px;
+  right: -15px;
+  font-size: 6rem;
+  color: rgba(74, 143, 82, 0.05);
+  transform: rotate(15deg);
+  z-index: 0;
+}
+
+.sidebar-section {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #eee;
+  position: relative;
+  z-index: 1;
+}
+
+.sidebar-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.sidebar-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar-title:before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 16px;
+  background-color: var(--primary-color);
+  margin-right: 8px;
+  border-radius: 2px;
+}
+
+/* 茶卡片样式 */
+.tea-card {
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,0.05);
+  position: relative;
+}
+
+.tea-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.tea-card-img {
+  height: 160px;
+  overflow: hidden;
+  position: relative;
+}
+
+.tea-card-img:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30%;
+  background: linear-gradient(to top, rgba(0,0,0,0.3), transparent);
+}
+
+.tea-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.tea-card:hover .tea-card-img img {
+  transform: scale(1.1);
+}
+
+.tea-card-body {
+  padding: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.tea-card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: #2c3e50;
+}
+
+.tea-card-text {
+  color: var(--text-light);
+  margin-bottom: 0.8rem;
+  line-height: 1.4;
+  font-size: 0.9rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  max-height: 3.8rem;
+}
+
+.tea-card-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.8rem;
+}
+
+.tea-card-actions .btn {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.8rem;
+}
+
+.tea-card:after {
+  content: '\f06c'; /* leaf icon */
+  font-family: "Font Awesome 5 Free";
+  position: absolute;
+  font-weight: 900;
+  bottom: 5px;
+  right: 5px;
+  font-size: 2.5rem;
+  color: rgba(74, 143, 82, 0.05);
+  transform: rotate(15deg);
+  z-index: 0;
+}
+
+/* 未登录提示 */
+.login-prompt {
+  background-color: #fff;
+  border-radius: var(--border-radius);
+  padding: 3rem 2rem;
+  text-align: center;
+  box-shadow: var(--shadow);
+  border: 1px dashed #ddd;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-prompt:before,
+.login-prompt:after {
+  content: '\f06c'; /* leaf icon */
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  position: absolute;
+  font-size: 8rem;
+  color: rgba(74, 143, 82, 0.05);
+  z-index: 0;
+}
+
+.login-prompt:before {
+  top: -20px;
+  left: -20px;
+  transform: rotate(-15deg);
+}
+
+.login-prompt:after {
+  bottom: -20px;
+  right: -20px;
+  transform: rotate(15deg);
+}
+
+.login-prompt h3 {
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+  position: relative;
+  z-index: 1;
+}
+
+.login-prompt p {
+  color: var(--text-light);
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.login-prompt .btn {
+  padding: 0.6rem 1.5rem;
+  border-radius: 50px;
+  font-weight: 500;
+  margin: 0 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* 响应式调整 */
+@media screen and (max-width: 768px) {
+  .profile-container {
+    margin: 1.5rem auto;
+  }
+  
+  .profile-header {
+    text-align: center;
+    padding: 1.5rem;
+  }
+  
+  .profile-actions {
+    justify-content: center;
+  }
+  
+  .profile-avatar {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .profile-name {
+    font-size: 1.5rem;
+  }
+  
+  .tea-card-img {
+    height: 150px;
+  }
+  
+  .sidebar-section {
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .profile-header {
+    padding: 1rem;
+  }
+  
+  .profile-avatar {
+    width: 90px;
+    height: 90px;
+  }
+  
+  .profile-name {
+    font-size: 1.3rem;
+  }
+  
+  .profile-section {
+    padding: 1rem;
+  }
+  
+  .profile-sidebar {
+    padding: 1rem;
+  }
+  
+  .login-prompt {
+    padding: 2rem 1rem;
+  }
+  
+  .tea-card-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .tea-card-actions .btn {
+    width: 100%;
+  }
+} 

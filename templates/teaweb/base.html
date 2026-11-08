@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}安徽省茶文化{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/tea-video.css' %}">
+    <link rel="stylesheet" href="{% static 'css/hide-virtual-human.css' %}">
+    <link rel="stylesheet" href="{% static 'css/theme-switcher.css' %}">
+    <link rel="stylesheet" href="{% static 'css/tea-float-effect.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <header>
+        <nav class="main-nav">
+            <div class="logo">茶典・茶事・茶味 —— 安徽茶文化全景指南</div>
+            <ul class="nav-links">
+                <li><a href="{% url 'wantea_source' %}" class="{% if request.path == '/wanteasource/' %}active{% endif %}">皖茶源</a></li>
+                <li><a href="{% url 'wantea_encyclopedia' %}" class="{% if request.path == '/wanteaencyclopedia/' %}active{% endif %}">皖茶百科</a></li>
+                <li><a href="{% url 'wantea_ceremony' %}" class="{% if request.path == '/wanteaceremony/' %}active{% endif %}">皖韵茶道</a></li>
+                <li><a href="{% url 'personal_center' %}" class="{% if request.path == '/personalcenter/' %}active{% endif %}">个人中心</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 视频播放区域 -->
+    <div id="tea-video-container">
+        <video autoplay loop muted>
+            <source src="/media/videos/tea-culture.mp4" type="video/mp4">
+            您的浏览器不支持视频播放
+        </video>
+    </div>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2025 安徽省茶文化网站</p>
+    </footer>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/tea-video.js' %}"></script>
+    <script src="{% static 'js/disable-virtual-human.js' %}"></script>
+    <script src="{% static 'js/theme-switcher.js' %}"></script>
+    <script src="{% static 'js/tea-float-effect.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html> 

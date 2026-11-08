@@ -1,0 +1,147 @@
+{% extends 'teaweb/base.html' %}
+{% load static %}
+
+{% block title %}{{ tea_info.name }} - 安徽省茶文化{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/tea-detail.css' %}">
+<style>
+    .video-container {
+        margin-bottom: 30px;
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 比例 */
+        height: 0;
+        overflow: hidden;
+        border-radius: 8px;
+        background-color: #f5f5f5;
+    }
+    
+    .video-container video,
+    .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+        border: none;
+    }
+    
+    .video-placeholder {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #004d40;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    
+    .video-placeholder h3 {
+        font-size: 22px;
+        margin-bottom: 15px;
+        color: #8bc34a;
+    }
+    
+    .video-placeholder p {
+        font-size: 16px;
+        max-width: 80%;
+        line-height: 1.6;
+    }
+    
+    .video-play-icon {
+        font-size: 48px;
+        margin-bottom: 20px;
+        color: #8bc34a;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="tea-detail-container">
+    <div class="back-link">
+        <a href="{% url 'wantea_encyclopedia' %}">< 返回皖茶百科</a>
+    </div>
+    
+    <!-- 视频播放器 -->
+    <div class="video-container">
+        {% if tea_id == 'huangshan' or tea_id == 'qimen' or tea_id == 'taiping' or tea_id == 'jingting' or tea_id == 'luilan' %}
+        <!-- 存在视频的茶叶 -->
+        <video id="tea-video-player" controls preload="metadata" poster="{% static 'images/'|add:tea_info.image_file %}" controlsList="nodownload">
+            <source src="{% static 'videos/'|add:tea_id|add:'.mp4' %}" type="video/mp4">
+            您的浏览器不支持视频播放
+        </video>
+        {% else %}
+        <!-- 其他茶叶当前没有视频，显示占位符 -->
+        <div id="video-placeholder" class="video-placeholder">
+            <div class="video-play-icon">
+                <i class="fas fa-video-slash"></i>
+            </div>
+            <h3>{{ tea_info.name }} 视频准备中</h3>
+            <p>我们正在为您准备高质量的{{ tea_info.name }}介绍视频，敬请期待。该视频将展示{{ tea_info.name }}的生长环境、采摘过程、制作工艺和冲泡方法等精彩内容。</p>
+        </div>
+        {% endif %}
+    </div>
+    
+    <div class="tea-detail">
+        <div class="tea-detail-image">
+            <img src="{% static 'images/'|add:tea_info.image_file %}" alt="{{ tea_info.name }}">
+        </div>
+        
+        <div class="tea-detail-info">
+            <h1 class="tea-detail-title">{{ tea_info.name }}</h1>
+            
+            <div class="tea-detail-meta">
+                <span class="tea-type">{{ tea_info.type }}</span>
+                <span class="tea-region">{{ tea_info.region }}</span>
+                
+                {% if user.is_authenticated %}
+                    <div class="favorite-action">
+                        <a href="{% url 'toggle_favorite_tea' tea_id %}" class="favorite-btn {% if is_favorite %}favorite-active{% endif %}">
+                            <i class="fas fa-heart"></i> 
+                            {% if is_favorite %}已收藏{% else %}收藏{% endif %}
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+            
+            <div class="tea-detail-section">
+                <h2>茶叶简介</h2>
+                <p>{{ tea_info.description }}</p>
+            </div>
+            
+            <div class="tea-detail-section">
+                <h2>产地特点</h2>
+                <p>{{ tea_info.origin_features }}</p>
+            </div>
+            
+            <div class="tea-detail-section">
+                <h2>品质特征</h2>
+                <ul class="tea-features-list">
+                    <li><strong>外形：</strong>{{ tea_info.appearance }}</li>
+                    <li><strong>香气：</strong>{{ tea_info.aroma }}</li>
+                    <li><strong>口感：</strong>{{ tea_info.taste }}</li>
+                    <li><strong>汤色：</strong>{{ tea_info.liquid_color }}</li>
+                </ul>
+            </div>
+            
+            <div class="tea-detail-section">
+                <h2>泡法指南</h2>
+                <p>{{ tea_info.brewing_guide }}</p>
+            </div>
+            
+            <div class="tea-detail-section">
+                <h2>历史传承</h2>
+                <p>{{ tea_info.history }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

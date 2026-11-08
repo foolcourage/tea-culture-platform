@@ -1,0 +1,25 @@
+/* 
+ * 隐藏数字人相关元素的全局样式
+ * 这个文件用于隐藏整个网站中可能出现的数字人元素
+ */
+
+/* 隐藏所有可能的数字人类名和ID */
+.virtual-human, 
+#virtual-human, 
+[class*="virtual-human"], 
+[id*="virtual-human"],
+.digital-human,
+#digital-human,
+[class*="digital-human"],
+[id*="digital-human"],
+div[data-virtual-human],
+div[data-digital-human] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    pointer-events: none !important;
+} 

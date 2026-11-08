@@ -1,0 +1,95 @@
+{% extends 'teaweb/base.html' %}
+{% load static %}
+
+{% block title %}个人中心 - 茶文化网站{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <div class="profile-header">
+        <h1>个人中心</h1>
+    </div>
+
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="profile-content">
+        <div class="profile-sidebar">
+            <div class="profile-avatar">
+                {% if user.profile.avatar %}
+                <img src="{{ user.profile.avatar.url }}" alt="{{ user.username }}的头像">
+                {% else %}
+                <img src="{% static 'images/default-avatar.png' %}" alt="默认头像">
+                {% endif %}
+            </div>
+            <div class="profile-username">{{ user.username }}</div>
+            <div class="profile-join-date">加入时间：{{ user.date_joined|date:"Y年m月d日" }}</div>
+            
+            <ul class="profile-menu">
+                <li class="active"><a href="{% url 'profile' %}">基本信息</a></li>
+                <li><a href="{% url 'edit_profile' %}">编辑资料</a></li>
+                <li><a href="{% url 'change_password' %}">修改密码</a></li>
+                <li><a href="{% url 'my_favorites' %}">我的收藏</a></li>
+                <li><a href="{% url 'my_comments' %}">我的评论</a></li>
+            </ul>
+        </div>
+        
+        <div class="profile-details">
+            <div class="profile-section">
+                <h2>基本信息</h2>
+                <table class="profile-info-table">
+                    <tr>
+                        <th>用户名：</th>
+                        <td>{{ user.username }}</td>
+                    </tr>
+                    <tr>
+                        <th>邮箱：</th>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                    {% if user.profile %}
+                    <tr>
+                        <th>昵称：</th>
+                        <td>{{ user.profile.nickname|default:"未设置" }}</td>
+                    </tr>
+                    <tr>
+                        <th>个人简介：</th>
+                        <td>{{ user.profile.bio|default:"这个人很懒，什么都没写~"|linebreaks }}</td>
+                    </tr>
+                    <tr>
+                        <th>地区：</th>
+                        <td>{{ user.profile.location|default:"未设置" }}</td>
+                    </tr>
+                    {% endif %}
+                </table>
+            </div>
+
+            <div class="profile-section">
+                <h2>最近活动</h2>
+                {% if recent_activities %}
+                <ul class="activity-list">
+                    {% for activity in recent_activities %}
+                    <li>
+                        <span class="activity-time">{{ activity.created_at|date:"Y-m-d H:i" }}</span>
+                        <span class="activity-type">{{ activity.get_activity_type_display }}</span>
+                        <span class="activity-content">{{ activity.content }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p class="no-data">暂无活动记录</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

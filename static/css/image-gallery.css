@@ -1,0 +1,229 @@
+/* 图片画廊容器 */
+.gallery-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    aspect-ratio: 16/9; /* 固定宽高比例 */
+}
+
+/* 图片画廊 */
+.image-gallery {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    perspective: 1000px; /* 添加3D视角效果 */
+}
+
+/* 单个图片容器 */
+.image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: all 1s cubic-bezier(0.215, 0.61, 0.355, 1);
+    transform-origin: bottom right; /* 以右下角为旋转原点 */
+    transform: rotate(-90deg) scale(0.8);
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.4);
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    backface-visibility: hidden; /* 防止3D旋转时出现闪烁 */
+}
+
+/* 活动图片 */
+.image.active {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+    z-index: 10;
+    filter: brightness(1);
+}
+
+/* 前一张图片效果 */
+.image.prev {
+    opacity: 0.3;
+    transform: rotate(90deg) scale(0.8);
+    z-index: 1;
+    filter: brightness(0.5) blur(3px);
+}
+
+/* 图片 */
+.image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.5s ease;
+}
+
+/* 添加指示器 */
+.gallery-indicators {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    z-index: 20;
+}
+
+.indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: 0 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative; /* 添加相对定位 */
+}
+
+.indicator::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: transparent; 
+    border: 2px solid transparent;
+    left: -2px;
+    top: -2px;
+    transition: all 0.3s ease;
+}
+
+.indicator:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+    transform: scale(1.1);
+}
+
+.indicator.active {
+    background-color: #fff;
+    transform: scale(1.2);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+.indicator.active::after {
+    border-color: #8bc34a;
+    animation: pulse-border 2s infinite;
+}
+
+@keyframes pulse-border {
+    0% { transform: scale(1); opacity: 1; }
+    70% { transform: scale(1.5); opacity: 0; }
+    100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* 左右导航按钮 */
+.gallery-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 20;
+    transition: all 0.3s ease;
+    opacity: 0.7;
+    user-select: none; /* 防止文本选择 */
+}
+
+.gallery-nav:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    opacity: 1 !important; /* 确保鼠标悬停时总是完全显示 */
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.gallery-nav.prev-btn {
+    left: 20px;
+}
+
+.gallery-nav.next-btn {
+    right: 20px;
+}
+
+/* 确保图标可点击 */
+.gallery-nav i {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    pointer-events: auto; /* 确保事件能被捕获 */
+}
+
+.gallery-nav i:active {
+    transform: scale(0.9); /* 点击时的缩小效果 */
+}
+
+/* 旋转效果提示 */
+.rotation-hint {
+    position: absolute;
+    bottom: 60px;
+    right: 60px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 15;
+    opacity: 0.7;
+    animation: pulse 2s infinite;
+}
+
+.rotation-hint i {
+    font-size: 20px;
+    animation: rotate-ccw 3s infinite linear;
+}
+
+@keyframes rotate-ccw {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(-360deg); }
+}
+
+@keyframes pulse {
+    0% { opacity: 0.4; transform: scale(0.9); }
+    50% { opacity: 0.8; transform: scale(1.1); }
+    100% { opacity: 0.4; transform: scale(0.9); }
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .gallery-container {
+        aspect-ratio: 4/3;
+    }
+    
+    .gallery-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+    
+    .rotation-hint {
+        width: 30px;
+        height: 30px;
+        bottom: 50px;
+        right: 50px;
+    }
+    
+    .rotation-hint i {
+        font-size: 16px;
+    }
+} 

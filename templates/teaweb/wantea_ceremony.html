@@ -1,0 +1,125 @@
+{% extends 'teaweb/base.html' %}
+{% load static %}
+
+{% block title %}皖韵茶道 - 安徽省茶文化{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/tea-ceremony.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="ceremony-container">
+    <h1 class="page-title">皖韵茶道</h1>
+    
+    <div class="ceremony-scene">
+        <!-- 左侧步骤区域 -->
+        <div class="ceremony-steps">
+            <div class="tea-table">
+                <h2>泡茶步骤</h2>
+                <div class="step-list">
+                    <div class="step-item" data-step="1">
+                        <span class="step-number">1</span>
+                        <span class="step-name">备器</span>
+                    </div>
+                    <div class="step-item" data-step="2">
+                        <span class="step-number">2</span>
+                        <span class="step-name">洗茶</span>
+                    </div>
+                    <div class="step-item" data-step="3">
+                        <span class="step-number">3</span>
+                        <span class="step-name">温杯</span>
+                    </div>
+                    <div class="step-item" data-step="4">
+                        <span class="step-number">4</span>
+                        <span class="step-name">投茶</span>
+                    </div>
+                    <div class="step-item" data-step="5">
+                        <span class="step-number">5</span>
+                        <span class="step-name">注水</span>
+                    </div>
+                    <div class="step-item" data-step="6">
+                        <span class="step-number">6</span>
+                        <span class="step-name">冲泡</span>
+                    </div>
+                    <div class="step-item" data-step="7">
+                        <span class="step-number">7</span>
+                        <span class="step-name">分茶</span>
+                    </div>
+                    <div class="step-item" data-step="8">
+                        <span class="step-number">8</span>
+                        <span class="step-name">品茶</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 中间茶具区域 -->
+        <div class="ceremony-center">
+            <div class="interactive-area">
+                <div class="teapot-area">
+                    <img src="{% static 'images/teapot.png' %}" alt="茶壶" class="teapot" id="teapot">
+                </div>
+                <div class="other-tools">
+                    <img src="{% static 'images/cup.png' %}" alt="茶杯" class="tool-item" id="tea-cup">
+                    <img src="{% static 'images/fairness-cup.png' %}" alt="公道杯" class="tool-item" id="fairness-cup">
+                    <img src="{% static 'images/tea-boat.png' %}" alt="茶船" class="tool-item" id="tea-boat">
+                    <img src="{% static 'images/tea-needle.png' %}" alt="茶针" class="tool-item" id="tea-needle">
+                </div>
+            </div>
+            
+            <div class="instruction-box">
+                <h3>茶道指引</h3>
+                <p id="current-instruction">请开始茶艺体验，点击"备器"步骤。</p>
+                <button id="next-step-btn" class="action-btn">开始体验</button>
+            </div>
+        </div>
+        
+        <!-- 右侧茶叶区域 -->
+        <div class="tea-leaf-area">
+            <h2>皖茶精选</h2>
+            <div class="tea-leaf-container">
+                <div class="tea-leaf-item" data-tea="huangshan">
+                    <img src="{% static 'images/huangshan-leaf.png' %}" alt="黄山毛峰" class="tea-leaf-img">
+                    <span class="tea-leaf-name">黄山毛峰</span>
+                </div>
+                <div class="tea-leaf-item" data-tea="qimen">
+                    <img src="{% static 'images/qimen-leaf.png' %}" alt="祁门红茶" class="tea-leaf-img">
+                    <span class="tea-leaf-name">祁门红茶</span>
+                </div>
+                <div class="tea-leaf-item" data-tea="taiping">
+                    <img src="{% static 'images/taiping-leaf.png' %}" alt="太平猴魁" class="tea-leaf-img">
+                    <span class="tea-leaf-name">太平猴魁</span>
+                </div>
+                <div class="tea-leaf-item" data-tea="luian">
+                    <img src="{% static 'images/luian-leaf.png' %}" alt="六安瓜片" class="tea-leaf-img">
+                    <span class="tea-leaf-name">六安瓜片</span>
+                </div>
+                <div class="tea-leaf-item" data-tea="luian">
+                    <img src="{% static 'images/jingting-leaf.png' %}" alt="敬亭绿雪" class="tea-leaf-img">
+                    <span class="tea-leaf-name">敬亭绿雪</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 茶道信息区域 -->
+    <div class="ceremony-info">
+        <div class="info-column">
+            <h3>安徽茶道特色</h3>
+            <p>安徽茶道源远流长，历史悠久，形成了独具特色的"皖韵茶道"。安徽茶道注重茶的品质、水的甘洌、器的古朴、境的幽雅，追求"清、静、雅、和"的意境，体现了安徽人民崇尚自然、追求和谐的生活态度。</p>
+        </div>
+        <div class="info-column">
+            <h3>茶道礼仪</h3>
+            <p>敬茶讲究"敬、静、净"三字诀。"敬"是心境，表示对客人的尊重；"静"是心态，泡茶需要平静的心态；"净"是要求，茶具需保持洁净。品茶时要先闻香、观色，再小口品味，感受茶的滋味，体会茶的韵味。</p>
+        </div>
+        <div class="info-column">
+            <h3>安徽功夫茶法</h3>
+            <p>安徽功夫茶法讲究"一礼、二看、三闻、四尝、五谈"，即首先行礼、观察茶叶外形和冲泡后的茶汤色泽、闻茶香、品茶味，最后进行茶文化交流。这种茶道方式体现了安徽茶道的精髓。</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/tea-ceremony.js' %}"></script>
+{% endblock %} 

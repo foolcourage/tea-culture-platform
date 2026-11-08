@@ -1,0 +1,953 @@
+{% extends 'teaweb/base.html' %}
+{% load static %}
+
+{% block title %}个人中心 - 茶百科{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+<style>
+  /* 额外的自定义样式，使页面更加饱满 */
+  .profile-container {
+    margin: 1.5rem auto;
+    background-color: #f9f7f2;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* 背景装饰元素 */
+  .bg-decoration {
+    position: absolute;
+    opacity: 0.05;
+    z-index: 0;
+  }
+  
+  .bg-leaf-1 {
+    top: 5%;
+    left: 2%;
+    font-size: 6rem;
+    transform: rotate(-20deg);
+    color: #4a8f52;
+  }
+  
+  .bg-leaf-2 {
+    bottom: 10%;
+    right: 3%;
+    font-size: 8rem;
+    transform: rotate(25deg);
+    color: #4a8f52;
+  }
+  
+  .bg-teapot {
+    bottom: 30%;
+    left: 5%;
+    font-size: 5rem;
+    color: #4a8f52;
+  }
+  
+  .bg-cup {
+    top: 20%;
+    right: 10%;
+    font-size: 4rem;
+    transform: rotate(10deg);
+    color: #4a8f52;
+  }
+  
+  /* 茶友等级系统 */
+  .tea-level {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    margin-top: 10px;
+    padding: 5px 12px;
+    background: linear-gradient(135deg, rgba(74, 143, 82, 0.1), rgba(74, 143, 82, 0.2));
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: #4a8f52;
+    box-shadow: 0 2px 8px rgba(74, 143, 82, 0.1);
+  }
+  
+  .tea-level i {
+    margin-right: 5px;
+    font-size: 1rem;
+  }
+  
+  .level-progress {
+    margin-top: 5px;
+    height: 5px;
+    background-color: rgba(74, 143, 82, 0.1);
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+  }
+  
+  .level-progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: linear-gradient(90deg, #4a8f52, #6aac72);
+    border-radius: 5px;
+    width: 65%;
+  }
+  
+  .level-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: #777;
+    margin-top: 3px;
+  }
+  
+  .profile-header {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    border-left: 5px solid #4a8f52;
+    z-index: 1;
+  }
+  
+  .profile-header:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 150px;
+    height: 150px;
+    background: linear-gradient(135deg, rgba(74, 143, 82, 0.1), rgba(74, 143, 82, 0.05));
+    border-radius: 0 0 0 70%;
+    z-index: 0;
+  }
+  
+  .profile-avatar-container {
+    position: relative;
+    padding: 5px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #4a8f52, #6aac72);
+    width: 130px;
+    height: 130px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 15px rgba(74, 143, 82, 0.2);
+  }
+  
+  .profile-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #fff;
+    transition: all 0.3s ease;
+  }
+  
+  .profile-avatar:hover {
+    transform: scale(1.05);
+  }
+  
+  .profile-name {
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+    color: #333;
+    position: relative;
+    display: inline-block;
+  }
+  
+  .profile-name:after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background-color: #4a8f52;
+    border-radius: 3px;
+  }
+  
+  .profile-username {
+    color: #666;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+  }
+  
+  .profile-actions {
+    margin-top: 15px;
+  }
+  
+  .profile-actions .btn {
+    margin-right: 10px;
+    padding: 8px 20px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+  
+  .profile-actions .btn:hover {
+    transform: translateY(-3px);
+  }
+  
+  .btn i {
+    margin-right: 8px;
+  }
+  
+  /* 侧边栏样式改进 */
+  .profile-sidebar {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    height: 100%;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    border-top: 4px solid #4a8f52;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .sidebar-section {
+    padding: 15px 0;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+  
+  .sidebar-title {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    color: #333;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+  }
+  
+  .sidebar-title i {
+    margin-right: 8px;
+    color: #4a8f52;
+  }
+  
+  /* 收藏茶叶卡片样式改进 */
+  .tea-collection {
+    padding: 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+    border-top: 4px solid #4a8f52;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .collection-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .collection-title {
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  .collection-title i {
+    margin-right: 10px;
+    color: #4a8f52;
+  }
+  
+  .tea-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  
+  .tea-card {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    position: relative;
+  }
+  
+  .tea-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .tea-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(74, 143, 82, 0), rgba(74, 143, 82, 0.05));
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .tea-card:hover::before {
+    opacity: 1;
+  }
+  
+  .tea-image {
+    height: 140px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .tea-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.3s ease;
+  }
+  
+  .tea-card:hover .tea-image img {
+    transform: scale(1.1);
+  }
+  
+  .tea-type-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(74, 143, 82, 0.9);
+    color: #fff;
+    padding: 3px 10px;
+    border-radius: 30px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    z-index: 2;
+  }
+  
+  .tea-content {
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .tea-name {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: #333;
+    font-weight: 600;
+  }
+  
+  .tea-meta {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 0.8rem;
+    color: #777;
+  }
+  
+  .tea-rating {
+    display: flex;
+    color: #ffc107;
+    margin-right: 10px;
+  }
+  
+  .tea-added {
+    display: flex;
+    align-items: center;
+  }
+  
+  .tea-added i {
+    margin-right: 3px;
+  }
+  
+  .tea-actions {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+  }
+  
+  .action-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    transition: all 0.2s ease;
+    text-decoration: none;
+  }
+  
+  .view-btn {
+    background: #e9f2eb;
+    color: #4a8f52;
+  }
+  
+  .view-btn:hover {
+    background: #4a8f52;
+    color: #fff;
+  }
+  
+  .remove-btn {
+    background: #ffeeee;
+    color: #dc3545;
+  }
+  
+  .remove-btn:hover {
+    background: #dc3545;
+    color: #fff;
+  }
+  
+  /* 活动部分 */
+  .recent-activity {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    border-top: 4px solid #4a8f52;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .activity-title {
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+  }
+  
+  .activity-title i {
+    margin-right: 10px;
+    color: #4a8f52;
+  }
+  
+  .activity-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .activity-item {
+    padding: 10px 0;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+    position: relative;
+    padding-left: 30px;
+    transition: all 0.3s ease;
+  }
+  
+  .activity-item:hover {
+    background-color: rgba(74, 143, 82, 0.03);
+    padding-left: 35px;
+  }
+  
+  .activity-item:last-child {
+    border-bottom: none;
+  }
+  
+  .activity-item:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 15px;
+    width: 10px;
+    height: 10px;
+    background: #4a8f52;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+  
+  .activity-item:hover:before {
+    transform: scale(1.2);
+    box-shadow: 0 0 0 2px rgba(74, 143, 82, 0.2);
+  }
+  
+  .activity-item:after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 25px;
+    width: 1px;
+    height: calc(100% - 15px);
+    background: rgba(74, 143, 82, 0.3);
+  }
+  
+  .activity-item:last-child:after {
+    display: none;
+  }
+  
+  .activity-content {
+    color: #555;
+  }
+  
+  .activity-date {
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 5px;
+  }
+  
+  /* 茶文化知识部分 */
+  .tea-knowledge {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    border-top: 4px solid #4a8f52;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .knowledge-title {
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .knowledge-title i {
+    margin-right: 10px;
+    color: #4a8f52;
+  }
+  
+  .knowledge-content {
+    padding: 15px;
+    background: #f9f7f2;
+    border-radius: 8px;
+    position: relative;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .knowledge-content:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transform: translateY(-3px);
+  }
+  
+  .knowledge-content:before {
+    content: '\f10d';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    color: #4a8f52;
+    font-size: 1.5rem;
+    opacity: 0.2;
+  }
+  
+  .tea-quote {
+    font-style: italic;
+    color: #555;
+    line-height: 1.6;
+  }
+  
+  .quote-author {
+    text-align: right;
+    margin-top: 10px;
+    color: #777;
+    font-weight: 500;
+  }
+  
+  /* 天气与茶建议部分 */
+  .tea-suggestion {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    border-top: 4px solid #4a8f52;
+  }
+  
+  .suggestion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .suggestion-title {
+    font-size: 1.2rem;
+    color: #333;
+    display: flex;
+    align-items: center;
+    margin: 0;
+  }
+  
+  .suggestion-title i {
+    margin-right: 8px;
+    color: #4a8f52;
+  }
+  
+  .weather-info {
+    display: flex;
+    align-items: center;
+    background: rgba(74, 143, 82, 0.05);
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+  }
+  
+  .weather-icon {
+    font-size: 2rem;
+    color: #ffc107;
+    margin-right: 15px;
+  }
+  
+  .weather-details p {
+    margin: 0;
+    color: #555;
+  }
+  
+  .weather-temp {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  
+  .tea-suggestion-content {
+    background: #f9f7f2;
+    padding: 15px;
+    border-radius: 8px;
+    position: relative;
+  }
+  
+  .tea-suggestion-content:before {
+    content: '\f0eb';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    color: #4a8f52;
+    font-size: 1.5rem;
+    opacity: 0.2;
+  }
+  
+  .suggestion-text {
+    color: #555;
+    line-height: 1.5;
+  }
+  
+  /* 响应式调整 */
+  @media (max-width: 991px) {
+    .profile-header {
+      text-align: center;
+    }
+    
+    .profile-avatar-container {
+      margin-bottom: 20px;
+    }
+    
+    .profile-info-container {
+      text-align: center;
+    }
+    
+    .profile-name:after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .tea-cards {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+    
+    .bg-decoration {
+      display: none;
+    }
+  }
+  
+  @media (max-width: 575px) {
+    .profile-container {
+      padding: 15px 10px;
+    }
+    
+    .profile-header {
+      padding: 15px;
+    }
+    
+    .profile-actions .btn {
+      padding: 6px 12px;
+      font-size: 0.85rem;
+    }
+    
+    .tea-cards {
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    
+    .tea-image {
+      height: 120px;
+    }
+    
+    .tea-content {
+      padding: 10px;
+    }
+    
+    .tea-name {
+      font-size: 0.95rem;
+    }
+    
+    .action-btn {
+      padding: 4px 8px;
+      font-size: 0.75rem;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- 背景装饰元素 -->
+<div class="bg-decoration bg-leaf-1"><i class="fas fa-leaf"></i></div>
+<div class="bg-decoration bg-leaf-2"><i class="fas fa-leaf"></i></div>
+<div class="bg-decoration bg-teapot"><i class="fas fa-mug-hot"></i></div>
+<div class="bg-decoration bg-cup"><i class="fas fa-coffee"></i></div>
+
+<div class="container profile-container">
+  {% if messages %}
+    <div class="messages">
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" data-aos="fade-down" data-aos-duration="800">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% if user.is_authenticated %}
+    <div class="profile-header" data-aos="fade-up" data-aos-duration="1000">
+      <div class="row align-items-center">
+        <div class="col-lg-3 col-md-4 text-center">
+          <div class="profile-avatar-container" data-aos="zoom-in" data-aos-delay="300">
+            {% if user.profile.avatar %}
+              <img src="{{ user.profile.avatar.url }}" alt="{{ user.username }}" class="profile-avatar">
+            {% else %}
+              <img src="{% static 'images/default_avatar.png' %}" alt="{{ user.username }}" class="profile-avatar">
+            {% endif %}
+          </div>
+          
+          <!-- 茶友等级 -->
+          <div class="tea-level" data-aos="fade-up" data-aos-delay="400">
+            <i class="fas fa-award"></i> 茶友等级: 品茶师
+          </div>
+          <div class="level-progress">
+            <div class="level-progress-bar"></div>
+          </div>
+          <div class="level-info">
+            <span>品茶师</span>
+            <span>65/100</span>
+            <span>茶艺大师</span>
+          </div>
+        </div>
+        <div class="col-lg-9 col-md-8">
+          <div class="profile-info-container">
+            <h1 class="profile-name" data-aos="fade-left" data-aos-delay="100">{{ user.first_name }} {{ user.last_name }}</h1>
+            <p class="profile-username" data-aos="fade-left" data-aos-delay="200">@{{ user.username }}</p>
+            <div class="profile-meta" data-aos="fade-left" data-aos-delay="300">
+              {% if user.profile.location %}
+                <span><i class="fas fa-map-marker-alt"></i> {{ user.profile.location }}</span>
+              {% endif %}
+              <span><i class="fas fa-calendar-alt"></i> 注册于 {{ user.date_joined|date:"Y年m月d日" }}</span>
+              <span><i class="fas fa-leaf"></i> 茶叶收藏: {{ favorite_teas|length }} 种</span>
+              <span><i class="fas fa-thumbs-up"></i> 茶评分享: 15篇</span>
+            </div>
+            <div class="profile-actions" data-aos="fade-left" data-aos-delay="400">
+              <a href="{% url 'edit_profile' %}" class="btn btn-primary"><i class="fas fa-edit"></i> 编辑资料</a>
+              <a href="{% url 'logout' %}" class="btn btn-outline-danger"><i class="fas fa-sign-out-alt"></i> 退出登录</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-4 col-md-5 mb-4">
+        <div class="profile-sidebar" data-aos="fade-right" data-aos-duration="1000">
+          <div class="sidebar-section" data-aos="fade-up" data-aos-delay="100">
+            <h3 class="sidebar-title"><i class="fas fa-user"></i> 个人简介</h3>
+            <p>{% if user.profile.bio %}{{ user.profile.bio }}{% else %}分享一下你的茶文化故事吧...{% endif %}</p>
+          </div>
+          <div class="sidebar-section" data-aos="fade-up" data-aos-delay="200">
+            <h3 class="sidebar-title"><i class="fas fa-heart"></i> 爱好的茶</h3>
+            <p>{% if user.profile.favorite_tea %}{{ user.profile.favorite_tea }}{% else %}还没有设置最爱的茶类型{% endif %}</p>
+          </div>
+          <div class="sidebar-section" data-aos="fade-up" data-aos-delay="300">
+            <h3 class="sidebar-title"><i class="fas fa-info-circle"></i> 个人信息</h3>
+            <p><i class="fas fa-birthday-cake"></i> 生日: {% if user.profile.birth_date %}{{ user.profile.birth_date }}{% else %}暂未设置{% endif %}</p>
+            <p><i class="fas fa-calendar-alt"></i> 注册日期: {{ user.date_joined|date:"Y年m月d日" }}</p>
+          </div>
+          
+          <!-- 天气与茶推荐 -->
+          <div class="tea-suggestion" data-aos="fade-up" data-aos-delay="350">
+            <div class="suggestion-header">
+              <h3 class="suggestion-title"><i class="fas fa-cloud-sun"></i> 今日茶推荐</h3>
+            </div>
+            <div class="weather-info">
+              <div class="weather-icon">
+                <i class="fas fa-sun"></i>
+              </div>
+              <div class="weather-details">
+                <p class="weather-temp">25°C</p>
+                <p>晴朗，适宜品茶</p>
+              </div>
+            </div>
+            <div class="tea-suggestion-content">
+              <p class="suggestion-text">今天天气晴朗，气温适中，非常适合品尝<strong>黄山毛峰</strong>。这款茶能带来清新提神的感觉，同时保持温和的口感。</p>
+            </div>
+          </div>
+          
+          <!-- 添加茶文化知识部分 -->
+          <div class="tea-knowledge" data-aos="fade-up" data-aos-delay="400">
+            <h3 class="knowledge-title"><i class="fas fa-book"></i> 每日茶语</h3>
+            <div class="knowledge-content">
+              <p class="tea-quote">茶之为饮，发乎神农氏，闻于鲁周公。汉世盛饮，唐代尚之，千载而下，饮之益广。</p>
+              <p class="quote-author">— 陆羽《茶经》</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-8 col-md-7">
+        <!-- 收藏的茶叶 -->
+        <div class="tea-collection" data-aos="fade-left" data-aos-duration="1000">
+          <div class="collection-header">
+            <h2 class="collection-title"><i class="fas fa-leaf"></i> 我收藏的茶</h2>
+            <a href="{% url 'wantea_encyclopedia' %}" class="btn btn-sm btn-outline-primary"><i class="fas fa-search"></i> 探索更多</a>
+          </div>
+          
+          {% if favorite_teas %}
+            <div class="tea-cards">
+              {% for tea in favorite_teas %}
+                <div class="tea-card" data-aos="zoom-in" data-aos-delay="{{ forloop.counter|add:100 }}">
+                  <div class="tea-image">
+                    {% if tea.image_file %}
+                      <img src="{% static 'images/'|add:tea.image_file %}" alt="{{ tea.name }}">
+                    {% else %}
+                      <img src="{% static 'images/default_tea.jpg' %}" alt="{{ tea.name }}">
+                    {% endif %}
+                    <span class="tea-type-badge">{{ tea.type }}</span>
+                  </div>
+                  <div class="tea-content">
+                    <h4 class="tea-name">{{ tea.name }}</h4>
+                    <div class="tea-meta">
+                      <div class="tea-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                      </div>
+                      <div class="tea-added">
+                        <i class="fas fa-clock"></i> {{ tea.added_at|date:"m-d" }}
+                      </div>
+                    </div>
+                    <div class="tea-actions">
+                      <a href="{% url 'tea_detail' tea.id %}" class="action-btn view-btn"><i class="fas fa-eye"></i> 查看</a>
+                      <a href="{% url 'toggle_favorite_tea' tea.id %}" class="action-btn remove-btn"><i class="fas fa-times"></i> 取消</a>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          {% else %}
+            <div class="alert alert-info" data-aos="fade-up">
+              <i class="fas fa-info-circle"></i> 您还没有收藏任何茶，去<a href="{% url 'wantea_encyclopedia' %}">茶叶百科</a>发现更多好茶吧！
+            </div>
+          {% endif %}
+        </div>
+        
+        <!-- 最近活动部分 -->
+        <div class="recent-activity" data-aos="fade-up" data-aos-delay="300">
+          <h3 class="activity-title"><i class="fas fa-history"></i> 近期活动</h3>
+          <ul class="activity-list">
+            <li class="activity-item">
+              <div class="activity-content">您浏览了黄山毛峰的详情页</div>
+              <div class="activity-date">今天 10:45</div>
+            </li>
+            <li class="activity-item">
+              <div class="activity-content">收藏了祁门红茶</div>
+              <div class="activity-date">昨天 15:30</div>
+            </li>
+            <li class="activity-item">
+              <div class="activity-content">评论了六安瓜片制作工艺的文章</div>
+              <div class="activity-date">3天前</div>
+            </li>
+            <li class="activity-item">
+              <div class="activity-content">完成了个人资料设置</div>
+              <div class="activity-date">1周前</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <div class="login-prompt" data-aos="zoom-in" data-aos-duration="1000">
+      <h3><i class="fas fa-user-lock"></i> 您需要登录才能查看个人中心</h3>
+      <p>登录或注册一个账号，开始您的茶文化探索之旅</p>
+      <div class="mt-4">
+        <a href="{% url 'login' %}" class="btn btn-primary" data-aos="fade-up" data-aos-delay="200"><i class="fas fa-sign-in-alt"></i> 登录</a>
+        <a href="{% url 'register' %}" class="btn btn-outline-secondary" data-aos="fade-up" data-aos-delay="300"><i class="fas fa-user-plus"></i> 注册</a>
+      </div>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    AOS.init({
+      once: true,
+      offset: 50
+    });
+    
+    // 知识卡片随机切换效果
+    const teaQuotes = [
+      {quote: "茶之为饮，发乎神农氏，闻于鲁周公。汉世盛饮，唐代尚之，千载而下，饮之益广。", author: "陆羽《茶经》"},
+      {quote: "宁可一日无食，不可一日无茶。", author: "古谚语"},
+      {quote: "开门七件事，柴米油盐酱醋茶。", author: "中国谚语"},
+      {quote: "香茗啜几杯，胸中甚了然。", author: "苏轼"},
+      {quote: "细啜襟灵爽，微吟齿颊香。", author: "白居易"}
+    ];
+    
+    const quoteElement = document.querySelector('.tea-quote');
+    const authorElement = document.querySelector('.quote-author');
+    const knowledgeContent = document.querySelector('.knowledge-content');
+    
+    if(knowledgeContent) {
+      knowledgeContent.addEventListener('click', function() {
+        const randomQuote = teaQuotes[Math.floor(Math.random() * teaQuotes.length)];
+        quoteElement.textContent = randomQuote.quote;
+        authorElement.textContent = "— " + randomQuote.author;
+        
+        // 添加简单动画
+        this.style.opacity = 0;
+        setTimeout(() => {
+          this.style.opacity = 1;
+        }, 300);
+      });
+    }
+  });
+</script>
+{% endblock %} 

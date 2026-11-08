@@ -1,0 +1,25 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Python 缓存和虚拟环境
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# 本地配置和数据库
+.env
+.env.*
+!.env.example
+db.sqlite3
+*.sql
+
+# 用户上传文件、收集后的静态文件
+media/
+staticfiles/
+
+# 编辑器和系统文件
+.idea/
+.vscode/
+Thumbs.db
+.DS_Store
